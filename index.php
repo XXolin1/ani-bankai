@@ -36,7 +36,7 @@ if($params[0] != ""){
     }else{
         // On envoie le code réponse 404
         http_response_code(404);
-        echo "La page recherchée n'existe pas";
+        echo "Attention, votre page n'existe pas. J'imagine que mon chat a marché sur mon clavier et a tout cassé.";
     }
 }else{
     header("Location: /login");

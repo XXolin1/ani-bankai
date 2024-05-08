@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="account-creation.css">
+    <script src="account-creation.js" defer></script>
+</head>
+
+<body>
+    <form id="formCreation">
+
+        <h1>Créer un compte</h1>
+
+        <p class="choose-email">Veuillez entrer vos informations :</p>
+
+        <div class="inputs">
+            <input id="pseudo" type="pseudo" placeholder="Pseudo">
+            <input id="email" type="email" placeholder="Email" />
+            <input id="email1" type="email" placeholder="Confirmation Email" />
+            <input id="password" type="password" placeholder="Mot de passe">
+            <input id="password1" type="password" placeholder="Confirmation Mot de passe">
+        </div>
+
+       
+        <div align="center">
+            <button type="submit">Se connecter</button>
+        </div>
+    </form>
+</body>
+
+</html>
