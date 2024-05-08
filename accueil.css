@@ -1,0 +1,193 @@
+nav {
+    background-color: rgba(246.49999290704727, 245.67827939987183, 245.67827939987183, 0.6800000071525574);
+    width: 100%;
+    height: 80px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* Centre horizontalement */
+    align-items: center;
+    /* Centre verticalement */
+
+}
+
+body {
+    background-image: url(/ani-bankai/images/fond_principal.png);  background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+
+    overflow-x: hidden;
+
+    margin: 0%;
+    padding: 0%;
+}
+
+/*
+.title {
+    color: rgba(0, 0, 0, 1);
+    width: 387px;
+    height: 121px;
+    padding: 10%;
+    font-family: Inter;
+    font-size: 50px;
+    -webkit-text-stroke: 1px white;
+    color: black;
+}*/
+
+.title {
+    background-image: url(/ani-bankai/images/background_bulle.png);
+    position: absolute;
+    width: 245px;
+    height: 155px;
+    background-size: 250px;
+    background-repeat: no-repeat;
+    top: 15%;
+    left: 67%;
+    margin: auto;
+    padding: auto;
+}
+
+
+#profil {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin-right: -80%;
+    background-image: url(/ani-bankai/images/profil_picture.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.text-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.button {
+    display: inline-block;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(138, 220, 255, 1);
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    margin: 8px;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #05a1bd;
+  }
+
+  
+
+/*
+main {
+    
+
+}
+
+#news {
+    
+}
+*/
+
+.carre {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 1);
+    width: 200px;
+    height: 185px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    margin: 1%;
+}
+
+.section {
+    position: relative;
+   
+    height: 400px;
+    width: 20%;
+    left: 70px;
+    top: 70px;
+
+    background-color: rgba(132, 127, 127, 0.92);
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+#scrolldown {
+    background-image: url(/ani-bankai/images/down-arrow.png);
+    transform: scaleY(-1);
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    top: 90%;
+    left: 50%;
+    margin: auto;
+    padding: auto;
+}
+
+#scrollup {
+    background-image: url(/ani-bankai/images/up-arrow.png);
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    top: 70%;
+    left: 90%;
+    margin: auto;
+    padding: auto;
+}
+
+
+.carre1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 25%;
+    margin-left: 18%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    background-color: rgba(205, 200, 200, 0.80);
+    border-radius: 20px;
+}
+
+footer {
+    background-color: #393939;
+    text-align: center;
+    padding: 100px;
+    position: relative;
+    filter: blur(1px);
+    /* Valeur du flou, ajustez-la selon vos besoins */
+}
+
+
+#popProfil { 
+
+	background-color:rgba(76.5, 76.5, 76.5, 0.85);
+    position: absolute;
+    left: 100%;
+	width:300px;
+	height:774px;
+    border:2px solid rgb(4, 85, 112);
+    display: none;
+}
