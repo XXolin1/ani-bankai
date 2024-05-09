@@ -39,6 +39,6 @@ if($params[0] != ""){
         echo "Attention, votre page n'existe pas. J'imagine que mon chat a marché sur mon clavier et a tout cassé.";
     }
 }else{
-    header("Location: /login");
+    //header("Location: /ani-bankai");
     exit();
 }
