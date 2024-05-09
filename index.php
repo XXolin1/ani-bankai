@@ -17,6 +17,7 @@ if($params[0] != ""){
     session_start();
     // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
     $controller = ucfirst($params[0]);
+    //var_dump($controller);
 
     // On sauvegarde le 2ème paramètre dans $action si il existe, sinon index
     $action = isset($params[1]) ? $params[1] : 'index';
@@ -39,6 +40,6 @@ if($params[0] != ""){
         echo "Attention, votre page n'existe pas. J'imagine que mon chat a marché sur mon clavier et a tout cassé.";
     }
 }else{
-    //header("Location: /ani-bankai");
+    //header("Location: /ani-bankai/accueil");
     exit();
 }

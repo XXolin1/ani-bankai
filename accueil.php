@@ -21,16 +21,16 @@
 
 
         <div class="title"></div>
+
+
+        <section id="popProfil">
+            <h1> Mon Profil </h1>
+
+            <p>wsh bi1 c en dev ici</p>
+            <a href="account-connexion.html"> Connexion </a>
+
+        </section>
     </header>
-
-    <section id="popProfil"> 
-        <h1> Mon Profil </h1>
-
-        <p>wsh bi1 c en dev ici</p>
-        <a href="account-connexion.html"> Connexion </a>
-
-    </section>
-
 
     <main>
 
