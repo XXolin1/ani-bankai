@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="accueil.css">
+    <link rel="stylesheet" href="assets/accueil.css">
     <script src="accueil.js" defer></script>
     <title>Ani-bankai</title>
 </head>

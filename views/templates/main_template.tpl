@@ -9,17 +9,15 @@
 
   <link rel="preload" href="/assets/{block name="css"}{/block}.css" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
+    
   <noscript>
     <link rel="stylesheet" href="/assets/{block name="css"}{/block}.css">
   </noscript>
 
-  <link rel="stylesheet" href="/assets/popup.css">
-  <link rel="stylesheet" href="/assets/navfoot.css">
+  <link rel="stylesheet" href="/assets/main_template.css">
 
   <title>Ani-bankai - {block name="title"}default{/block}</title>
 
-  <script src="/assets/popup.js" defer></script>
-  <script src="/assets/app.js" defer></script>
   <script src="/assets/{block name="script"}{/block}.js" defer></script>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -29,8 +27,7 @@
 
   <meta name="msapplication-TileColor" content="#2d89ef">
   <meta name="theme-color" content="#ffffff">
-  
-  <link rel="manifest" href="manifest.json">
+
 
 </head>
 

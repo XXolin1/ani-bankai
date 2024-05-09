@@ -4,7 +4,7 @@
 class Accueil extends Controller{
     public function index(){ 
         //$this->checkIfLoggedIn();
-        var_dump("j'arrive ici");
+        //var_dump("j'arrive ici");
         $this->render("index");
     }
 }
