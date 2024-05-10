@@ -5,7 +5,7 @@
 {block name="script"}accueil{/block}
 
 
-{block name="title"}Accueil-ani-bankai-test{/block}
+{block name="title"}Ani-bankai{/block}
 {block name="content"}
 
     <main>
