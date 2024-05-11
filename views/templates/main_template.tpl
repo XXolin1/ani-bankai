@@ -27,10 +27,11 @@
 <body>
     <header>
         <nav>
-            <a class="button"> Accueil</a>
-            <a href="nouveauté.html" class="button"> Nouveauté</a>
-            <a href="bankai-list.html" class="button"> Bankai-list</a>
-            <a href="ani-page.html" class="button"> ani-page</a>
+            <a href="accueil" class="button"> Accueil</a>
+            <a href="nouveaute" class="button"> Nouveautés</a>
+            <a href="bankai_list" class="button"> Bankai-list</a>
+            <a href="random_search" class="button"> Trouver mon anime</a>
+            <a href="ani_page" class="button"> ani-page</a>
             <div id="profil"> </div>
         </nav>
 
