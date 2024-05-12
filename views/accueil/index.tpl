@@ -11,7 +11,7 @@
     <main>
 
         <section class="section">
-            <h1> News </h1> <br>
+            <h1> News mec</h1> <br>
             <p></p>
         </section>
 
