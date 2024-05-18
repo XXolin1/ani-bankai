@@ -43,7 +43,7 @@
             <h1> Mon Profil </h1>
 
             <p>wsh bi1 c en dev ici</p>
-            <a href="account-connexion.html"> Connexion </a>
+            <a href="account_connexion"> Connexion </a>
 
         </section>
     </header>

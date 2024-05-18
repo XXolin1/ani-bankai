@@ -1,38 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body {
-    background-image: url(https://w.forfun.com/fetch/ca/caa8593c2c77a42a666ea5ea0b68c90f.jpeg);
-    display: flex;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
-form {
-    margin-top: 11.5%;
-    background-color: #fff;
-    padding: 40px 60px;
-    border-radius: 10px;
-    min-width: 300px;
-}
-
-form h1 {
-    color: #eb7371;
-    text-align: center;
-}
-
-
-form p.choose-email {
-    text-align: center;
-}
-
-form .inputs {
-    display: flex;
-    flex-direction: column;
-}
 
 form .inputs input[type='email'],
 input[type='password'] {
@@ -44,26 +10,7 @@ input[type='password'] {
     margin-bottom: 15px;
 }
 
-form p.inscription {
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: #878787;
-}
 
-form p.inscription span {
-    color: #eb7371;
-}
-
-form button {
-    padding: 15px 25px;
-    border-radius: 5px;
-    border: none;
-    font-size: 15px;
-    color: #fff;
-    background-color: #eb7371;
-    outline: none;
-    cursor: pointer;
-}
 
 .deco-cree {
     text-decoration: none;
