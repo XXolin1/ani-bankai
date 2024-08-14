@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/{block name="css"}{/block}.css">
   </noscript>
 
-  <link rel="stylesheet" href="assets/bankai_list_template.css">
+  <link rel="stylesheet" href="assets/ani_page_template.css">
 
   <title>Ani-bankai - {block name="title"}default{/block}</title>
 
@@ -25,27 +25,12 @@
 </head>
 
 <body>
-    <header>
-
-    {block name="banniere"}{/block}
-
-        <div class="title"></div>
 
 
-        <section id="popProfil">
-            <h1> Mon Profil </h1>
-
-
-        </section>
-    </header>
+  {block name="header"}{/block}
 
   {block name="content"}{/block}
 
-    <footer>
-
-        <div id="scrollup"> </div>
-
-    </footer>
 
 </body>
 

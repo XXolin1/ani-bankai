@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  background-image: url(/ani-bankai/images/Spice-and-wolf.png);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  overflow-x: hidden;
+}
+
+header {
+  height: 265px;
+}
+
+#name_profile {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+  position: absolute;
+  top: 85px;
+  left: 335px;
+}
+
+.profile_picture {
+  position: relative;
+  top: 45px;
+  left: 100px;
+  background-color: rgba(217, 217, 217, 1);
+  width: 175px;
+  height: 175px;
+  border-radius: 168px;
+}
+
+.banniere {
+  position: absolute;
+  background-size: cover;
+  height: 265px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgba(57, 154, 209, 0.24);
+  z-index: -1;
+}
+
+.favorites_title {
+  position: relative;
+  left: 10%;
+  margin-top: 4%;
+  height: 200px;
+  width: 35%;
+  background-color: seashell;
+}
+
+
+/* cercle crayon */
+
+.crayon {
+  position: absolute;
+  background-image: url(/ani-bankai/images/cercle.png);
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  top: 350px;
+  right: 90px;
+}
+
+/* fin cercle crayon */
+
+/* menu modif */
+
+.input {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  position: absolute;
+  top: 400px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 185px;
+  background-color: rgba(57, 154, 209, 0.9);
+  padding-top: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  transition: 1s;
+  opacity: 0.9;
+  overflow: hidden;
+}
+
+.value {
+  font-size: 13px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  position: relative;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 1s;
+  box-sizing: border-box;
+}
+
+.value:not(:active):hover,
+.value:focus {
+  display: flex;
+  box-sizing: border-box;
+  border: 2px solid #aab6c7;
+  opacity: 0.7;
+  color: #ffffff;
+}
+
+.input:hover> :not(.value:hover) {
+  transition: 100ms;
+}
+
+/* fin menu modif */
