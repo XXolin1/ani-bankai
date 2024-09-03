@@ -15,6 +15,10 @@
         <div id="name_profile"> XXolin </div>
     </section>
 
+    <div id="menu" class="menu"></div>
+
+    <div class="menu-pop"></div>
+
 
     <div class="banniere"></div>
 
@@ -27,7 +31,11 @@
 
 <main>
 
-    <article class="favorites_title"> " infos a add " </article>
+    <article class="ani_bio"> " bio " </article>
+    <article class="ani_infos"> " last infos " </article>
+    <article class="ani_anime_view"> " anime view " </article>
+    <article class="ani_manga_view"> " manga view " </article>
+    <article class="ani_favori"> " favori-anime-manga " </article>
 
 
     <div class="crayon" id="crayon">
