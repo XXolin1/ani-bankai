@@ -9,21 +9,14 @@
 {block name="content"}
 
     <main>
-
-        <section class="section">
-            <h1> News mec</h1> <br>
-            <p></p>
-        </section>
-
-        <div id="scrolldown"> </div>
-
-        <article class="carre1">
-            <div class="carre"></div>
-            <div class="carre"></div>
-            <div class="carre"></div>
-            <div class="carre"></div>
-        </article>
-
-
+        <div class="Overview">
+            <h1 class="title">Demon Slayer</h1>
+            <div class="blur">
+                <div class="Anime"></div>
+                <div class="Anime"></div>
+                <div class="Anime"></div>
+                <div class="Anime"></div>
+            </div>
+        </div>
     </main>
 {/block}

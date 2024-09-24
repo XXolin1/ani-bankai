@@ -104,7 +104,8 @@ main{
 .ani_anime_view {
   background-color: #EEEEEE;
   position: absolute;
-  font-size: 12px;
+  display: flex;
+  font-size: 13px;
   font-weight: bold;
   right: 32%;
   margin-top: 4%;
@@ -117,7 +118,8 @@ main{
 .ani_manga_view {
   background-color: #EEEEEE;
   position: absolute;
-  font-size: 12px;
+  display: flex;
+  font-size: 13px;
   font-weight: bold;
   right: 10%;
   margin-top: 4%;
@@ -149,7 +151,6 @@ main{
 
 .viewed {
   background-color: #EEEEEE;
-  position: absolute;
   /*
   display: grid;
   align-items: center;
@@ -163,7 +164,6 @@ main{
 
 .in_progress {
   background-color: #EEEEEE;
-  position: absolute;
   /*
   display: grid;
   align-items: center;
@@ -177,7 +177,6 @@ main{
 
 .droped {
   background-color: #EEEEEE;
-  position: absolute;
   /*
   display: grid;
   align-items: center;
