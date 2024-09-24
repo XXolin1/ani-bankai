@@ -1,4 +1,4 @@
-
+/*
 //document.addEventListener("DOMContentLoaded", (event) => {
 
 let scrollDownButton = document.getElementById('scrolldown');
@@ -112,9 +112,13 @@ function fProfil(clickProfil) {
     }
 }
 
+*/
 
+let animeDetails = document.getElementById('animeDetails');
 
-
+animeDetails.addEventListener("mouseenter", () => {
+    
+})
 
 
 //})

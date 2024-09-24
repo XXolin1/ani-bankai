@@ -12,10 +12,10 @@
         <div class="Overview">
             <h1 class="title">Demon Slayer</h1>
             <div class="blur">
-                <div class="Anime"></div>
-                <div class="Anime"></div>
-                <div class="Anime"></div>
-                <div class="Anime"></div>
+                <div class="anime" id="animeDetails"></div>
+                <div class="anime" id="animeDetails"></div>
+                <div class="anime" id="animeDetails"></div>
+                <div class="anime" id="animeDetails"></div>
             </div>
         </div>
     </main>
