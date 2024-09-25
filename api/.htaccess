@@ -1,0 +1,19 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+
+
+
+
+# Cette ligne de règle de réécriture Apache redirige toutes les requêtes vers index.php en passant l'URI demandée en tant que paramètre GET nommé "demande" 
+# et en conservant les paramètres de chaîne de requête d'origine.
+
+# ^(.*)$ : Correspond à n'importe quel chemin d'URI, capturant tout ce qui suit le nom de domaine.
+# index.php?demande=$1 : Redirige vers index.php tout en passant la demande (URI) en tant que paramètre GET nommé "demande".
+# %{QUERY_STRING} : Capture et passe les paramètres de chaîne de requête (les paramètres GET) tels quels.
+# [NC,L] : Drapeaux de la règle de réécriture. [NC] indique une correspondance insensible à la casse, [L] signifie que cette règle est la dernière à être appliquée.
+
+
+RewriteRule ^(.*)$ index.php?demande=$1&%{QUERY_STRING} [NC,L]
+
