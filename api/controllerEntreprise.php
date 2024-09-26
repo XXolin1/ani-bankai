@@ -15,7 +15,7 @@ class ControllerEntreprise
     public function controller()
     {
         require_once ("./class/entreprise.php");
-        $this->reqEntreprise = new Entreprise($this->parametreGet);
+        $this->reqEntreprise = new Entreprise(param: $this->parametreGet);
 
         switch ($this->url[1]) {
             case "read":
