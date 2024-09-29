@@ -30,61 +30,65 @@
 {block name="content"}
 
 <main>
+        <!-- Colonne de droite -->
 
-    <article class="ani_bio"> " bio " </article>
+    <div class="leftColumn">
+        <article class="ani_bio"> " bio " </article>
+        <article class="ani_favori"> " favori-anime-manga " </article>
+    </div>
+    
+    <div class="rightColumn">
+        <div class="stats">
+        <article class="ani_anime_view"> 
+            <div class="viewed">
+                <div class="info_view_text"> anime viewed </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
+            </div>
 
-    <article class="ani_infos"> " last infos " </article>
+            <div class="in_progress">
+                <div class="info_view_text"> anime in progress </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
+            </div>
 
-    <!-- Partie anime -->
+            <div class="droped">
+                <div class="info_view_text"> anime droped </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 25 </div>        <!--test des valeurs-->
+            </div>
 
-    <article class="ani_anime_view"> 
-        <div class="viewed">
-            <div class="info_view_text"> anime viewed </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
-        </div>
+            <div class="ani_view_deco"></div>
+        </article>  
 
-        <div class="in_progress">
-            <div class="info_view_text"> anime in progress </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
-        </div>
+        <!---->
 
-        <div class="droped">
-            <div class="info_view_text"> anime droped </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 25 </div>        <!--test des valeurs-->
-        </div>
+        <!-- Partie manga -->
 
-        <div class="ani_view_deco"></div>
-    </article>
+        <article class="ani_manga_view"> 
+            <div class="viewed">
+                <div class="info_view_text"> manga viewed </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
+            </div>
 
-    <!---->
+            <div class="in_progress">
+                <div class="info_view_text"> manga in progress </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
+            </div>
 
-    <!-- Partie manga -->
+            <div class="droped">
+                <div class="info_view_text"> manga droped </div>                  <!--test des valeurs-->
+                <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
+            </div>
 
-    <article class="ani_manga_view"> 
-        <div class="viewed">
-            <div class="info_view_text"> manga viewed </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
-        </div>
+            <div class="ani_view_deco"></div>
+        </article>
 
-        <div class="in_progress">
-            <div class="info_view_text"> manga in progress </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
-        </div>
-
-        <div class="droped">
-            <div class="info_view_text"> manga droped </div>                  <!--test des valeurs-->
-            <div class="info_view_value"> 150 </div>        <!--test des valeurs-->
-        </div>
-
-        <div class="ani_view_deco"></div>
-    </article>
-
-    <!---->
-
-    <article class="ani_favori"> " favori-anime-manga " </article>
+        <!---->
+    </div>
 
 
-    <div class="crayon" id="crayon"> </div>
+        <article class="ani_infos"> " last infos " </article>
+    </div>
+
+<!--<div class="crayon" id="crayon"> </div>-->
 
     <div class="input" id="modif_menu">
         <button class="value">
