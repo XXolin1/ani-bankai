@@ -60,14 +60,15 @@ nav {
 
 .button:hover {
     background-color: #05a1bd;
+    border-color: white;
   }
 
 
 footer {
     background-color: #393939;
     text-align: center;
-    padding: 100px;
-    position: relative;
+    width: 100%;
+    height: 130px;
     filter: blur(1px);
     /* Valeur du flou, ajustez-la selon vos besoins */
 }
