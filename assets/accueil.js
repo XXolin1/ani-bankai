@@ -114,11 +114,40 @@ function fProfil(clickProfil) {
 
 */
 
+
+
 let animeDetails = document.getElementById('animeDetails');
+
+window.addEventListener('load', function () {
+    getColor(document.querySelector("body"));
+  })
 
 animeDetails.addEventListener("mouseenter", () => {
     
 })
+
+
+
+function getColor(sourceImage){
+    // Get the source element's style
+    var style = sourceImage.currentStyle || window.getComputedStyle(sourceImage, false)
+    // isolate the source element's url
+    var bi = style.backgroundImage.slice(4, -1).replace(/"/g, "");
+    // Create a new Image object
+    const img = new Image();
+    // Set the new image object's url as the source url
+    img.src = bi;
+
+    // Selects the element we want to change the color of
+    let background = document.querySelector("nav");
+    // Initialize the ColorThief element
+    let colorThief = new ColorThief();
+    // Get the dominant color of the source image
+    let color = colorThief.getColor(img);
+    // Sets the background color and remove the background image
+    background.style.backgroundColor = "rgba(" + color + ",0.6800000071525574)";
+    background.style.backgroundImage = 'none';
+}
 
 
 //})
