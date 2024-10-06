@@ -24,20 +24,27 @@ try {
         switch ($url[0]) {
 
             case "connexion":
-                require_once ("./models/session.php");
+                require_once ("./class/session.php");
                 $reqConnexion = new Authentication(); // parametre a verifier ca amrche
                 $Connexion = $reqConnexion->connexion(); // mais pas la
                 CheckConnexion($Connexion);
                 exit(0);
 
 
+            case "entreprises":
+                require_once ("./controllerEntreprise.php");
+                $reqEntreprise = new ControllerEntreprise($parametreGet, $url);
+                $response = $reqEntreprise->controller();
+                sendResponse($response);
+                break;
+
+                
             case "animes":
                 require_once ("./controllers/controllerAnime.php");
                 $queryAnime = new ControllerAnime($parametreGet, $url);
                 $response = $queryAnime->controller();
                 sendResponse($response);
                 break;
-
 
 
             default:

@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/* TOUT METTRE EN % POUR QUE CA S'ADAPTE A TOUTES LES TAILLES D'ECRAN */
+html {
+  height: 100%;
+}
 
 body {
   background-image: url(/ani-bankai/images/fond_principal.png);
-  margin: 0;
-  padding: 0;
   height: 100%;
+  margin: 0;  
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -16,268 +17,249 @@ body {
 }
 
 header {
-  height: 265px;
-  margin-bottom: 20px;
-}
-
-main{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
-
-.menu {
-  background-image: url(/ani-bankai/images/menu-burger.png);
-  position: absolute;
+  justify-content: space-between;
+  height: 30%;
   background-size: cover;
-  width: 40px;
-  height: 40px;
-  top: 105px;
-  right: 90px;
-}
-
-.menu-pop {
-  background-color: #dbdbdb;
-  border: solid 1px #BABABA;
-  position: absolute;
-  right: 10px;
-  top: 180px;
-  height: 500px;
-  width: 200px;
-  border-radius: 5px;
-  z-index: 1;
-}
-
-#name_profile {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: 50px;
-  position: absolute;
-  top: 85px;
-  left: 400px;
-}
-
-.profile_picture {
-  position: relative;
-  top: 45px;
-  left: 170px;
-  background-color: rgba(217, 217, 217, 1);
-  width: 175px;
-  height: 175px;
-  border-radius: 168px;
-}
-
-.banniere {
-  position: absolute;
-  background-size: cover;
-  height: 265px;
   width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.9;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: rgba(57, 154, 209, 0.24);
+  background-color: rgba(57, 154, 209, 0.3);
   z-index: -1;
 }
 
-.ani_bio {
-  background-color: #EEEEEE;
-  width: 100%;
-  height: 100px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
-}
+.profile {
 
-.ani_infos {
-  background-color: #EEEEEE;
-  height: 100px;
-  width: 100%;
-  border-radius: 3px;
-  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.ani_anime_view {
   display: flex;
-  justify-content: space-between;
-  background-color: #EEEEEE;
-  font-size: 13px;
-  font-weight: bold;
-  border-radius: 3px;
-  /*box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);*/
-}
-
-.ani_manga_view {
-  display: flex;
-  justify-content: space-between;
-  background-color: #EEEEEE;  
-  font-size: 13px;
-  font-weight: bold;
-  border-radius: 3px;
-  /*box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);*/
-}
-
-.ani_favori {
-  background-color: #EEEEEE;
-  height: 100px;
-  width: 100%;
-  border-radius: 3px;
-  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.ani_view_deco{
-  background-color: #F3A2A2;
-  bottom: 0;
-  height: 10%;
-  border-radius: 0px 0px 3px 3px;
-}
-
-.viewed {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #EEEEEE;
-  /*
-  display: grid;
   align-items: center;
-  justify-content: center;
-  */
-  text-align: center;
-  border-radius: 3px 0px 0px 0px;
+  margin-left: 12%;
+  width: 80%;
+  height: 100%;
 }
 
-.in_progress {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #EEEEEE;
-  /*
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  */
-  text-align: center;
+.profile_picture {
+  background-color: rgba(217, 217, 217, 1);
+  width: 11vw;
+  height: 11vw;
+  border-radius: 100%;
+  z-index: -1;
 }
 
-.droped {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #EEEEEE;
-  /*
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  */
-  text-align: center;
-  border-radius: 0px 3px 0px 0px;
+.profile_pseudo {
+  margin: 2%;
 }
 
-.info_view_text {  /*pas super clean mais a voir pour opti plus tard*/
-
-}
-
-.info_view_value {  /*pas super clean mais a voir pour opti plus tard*/
-   
-}
-
-/* containers colonne */
-
-/* Left */
-
-.leftColumn{
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-/* right */
-
-.rightColumn{
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-.stats{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  height: 100px;
-  width: 100%;
-}
-
-/* cercle crayon */
-
-.crayon {
-
-  background-image: url(/ani-bankai/images/cercle.png);
+.profile_badge {
+  background-image: url(/ani-bankai/images/badge.png);
   background-size: cover;
-  width: 40px;
-  height: 40px;
-  top: 350px;
-  right: 90px;
+  width: 5vw;
+  height: 5vw;
 }
 
-/* fin cercle crayon */
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
 
-/* menu modif */
+.img {
+  width: 20%;
+  height: 20%;
+  background-image: url(/ani-bankai/images/menu-burger.png);
+  background-size: cover;
+}
 
-.input {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  position: absolute;
-  top: 400px;
-  right: 40px;
+/* main */
+
+main{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  height: 70%;
+}
+
+/* container */
+
+.left_container {
   display: flex;
   flex-direction: column;
-  width: 120px;
-  height: 185px;
-  background-color: rgba(57, 154, 209, 0.9);
-  padding-top: 10px;
-  padding-left: 10px;
-  border-radius: 10px;
-  transition: 1s;
-  opacity: 0.9;
-  overflow: hidden;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 37%;
+  height: 100%;
 }
 
-.value {
-  font-size: 13px;
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  color: white;
+.right_container {
   display: flex;
-  position: relative;
-  gap: 5px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: 1s;
-  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 37%;
+  height: 100%;
 }
 
-.value:not(:active):hover,
-.value:focus {
+.perso_container {
   display: flex;
-  box-sizing: border-box;
-  border: 2px solid #aab6c7;
-  opacity: 0.7;
-  color: #ffffff;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 4%;
+  height: 90%;
 }
 
-.input:hover> :not(.value:hover) {
-  transition: 100ms;
+/* content left */
+
+.bio {
+  margin-top: 5%;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 23%;
+  border-radius: 10px;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* fin menu modif */
+.left_category {
+  margin-top: 5%;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  height: 4.7%;
+  width: 100%;
+}
 
+.button_left {
+  margin-left: 6%;
+  background-color: #376ecd;
+  border-radius: 8px;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 37%;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
+}
 
-@media only screen and (max-width: 1500px) {
-  .stats {
-    flex-direction: column;
-  }
+/* content right */
+
+.stat {
+  margin-top: 5%;
+  display: flex;
+  width: 100%;
+  height: 23%;
+  border-radius: 10px;  
+  justify-content: space-between;
+}
+
+.stat_anime_manga {
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 46%;
+} 
+
+.stat_box {
+  background-color: #00ffff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 32%;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.list_like_info {
+  background-color: #b64242;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  height: 30%;
+}
+
+.right_category {
+  margin-top: 5%;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  height: 4.7%;
+  width: 100%;
+}
+
+.button_right {
+  background-color: #376ecd;
+  border-radius: 8px;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 37%;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* both */
+
+.info_bloc {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 44%;
+}
+
+.list_bloc {
+  background-color: #ffffff;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30%;
+}
+
+.list_bloc_img{
+  margin-left: 12px;
+  background-image: url(/ani-bankai/images/Spice-and-wolf.png);
+  background-size: cover;
+  border: solid 4px #000000;
+  border-radius: 8px;
+  height: 60%;
+  width: auto;
+  aspect-ratio: 1 / 1; /* allows you to define the desired width-to-height ratio of an element's box. */
+}
+
+.list_bloc_title {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%;
+  height: 60%;
+}
+
+.list_bloc_infos {
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+}
+
+.title {
+  font-family: 'Inter';font-size: 0.6rem;
+}
+
+/* personnalisation */
+
+.personnalisation {
+  background-color: #ffffff;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
