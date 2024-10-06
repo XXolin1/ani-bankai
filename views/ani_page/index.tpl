@@ -61,12 +61,21 @@
         </div>
 
         <div class="info_bloc">
-            
+
             <div class="list_bloc">
                 <div class="list_bloc_img"></div>
                 <div class="list_bloc_title">
-                    <div class="title"> Titre original : Haikyū!! / ハイキュー!!</div>
-                    <div class="title"> Titre alternatif : Haikyuu !! / Haikyû!</div>
+
+                    <div class="title_bloc">
+                        <div class="title"> Titre original : </div>
+                        <div class="name_anime" id="original_name">Haikyū!! / ハイキュー!!</div>
+                    </div>
+
+                    <div class="title_bloc">
+                        <div class="title"> Titre alternatif : </div>
+                        <div class="name_anime" id="alternative_name">Haikyuu !! / Haikyû!</div>
+                    </div>
+
                 </div>
 
                 <div class="list_bloc_infos">autre</div>

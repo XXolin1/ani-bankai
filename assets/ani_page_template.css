@@ -251,8 +251,18 @@ main{
   height: 100%;
 }
 
+.title_bloc {
+  display: flex;
+  align-items: center;
+}
+
 .title {
-  font-family: 'Inter';font-size: 0.6rem;
+  font-family: 'Inter';font-size: 0.7rem;
+  margin-right: 2px;
+}
+
+.name_anime {
+  font-family: 'Inter';font-size: 0.7rem;
 }
 
 /* personnalisation */
