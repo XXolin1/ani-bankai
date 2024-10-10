@@ -68,8 +68,8 @@
                 <div class="list_bloc_img"></div>
                 <div class="list_bloc_title">
 
-                    <div class="title_bloc">
-                        <div class="title"> Titre original : </div>
+                    <div class="title_bloc" id="title_bloc">
+                        <div class="title" id="title"> Titre original : </div>
                         <div class="name_anime" id="original_name">Haikyū!! / ハイキュー!!</div>
                     </div>
 
