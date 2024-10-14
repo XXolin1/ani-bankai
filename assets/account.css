@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-    background-image: url(https://w.forfun.com/fetch/ca/caa8593c2c77a42a666ea5ea0b68c90f.jpeg);
+    background-image: url(/ani-bankai/images/landscape_wallpaper2.jpg);
     display: flex;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
@@ -12,7 +12,7 @@ body {
 }
 
 form {
-    margin-top: 11.5%;
+    margin-top: 8%;
     background-color: #fff;
     padding: 40px 60px;
     border-radius: 10px;
@@ -34,6 +34,14 @@ form .inputs {
     flex-direction: column;
 }
 
+form .inputs input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    outline: none;
+    margin-bottom: 15px;
+}
 
 form p.inscription {
     font-size: 14px;

@@ -247,6 +247,7 @@ main{
 .title_bloc {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .title {
@@ -257,8 +258,12 @@ main{
 }
 
 .name_anime {
+  margin-right: 15px;
   font-family: 'Inter';
   font-size: 0.85rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .precise_info {
@@ -270,7 +275,7 @@ main{
 
 .important_value {
   font-family: 'Inter';
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #F3A867
 }

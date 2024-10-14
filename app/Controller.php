@@ -19,7 +19,8 @@ abstract class Controller
             $smarty->display(ROOT . "views/" . strtolower(get_class($this)) . "/" . $fichier . ".tpl");
         } catch(SmartyException $e) {
             // En cas d'erreur Smarty, rediriger vers une page de déconnexion
-            require_once(ROOT.'/views/logout/logout.php');
+            #require_once(ROOT.'/views/logout/logout.php'); // a mettre plus tard
+            echo "Erreur Smarty : " . $e->getMessage();
         }
     
         //$content = ob_get_clean();
