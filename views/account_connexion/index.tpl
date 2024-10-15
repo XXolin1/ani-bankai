@@ -2,7 +2,7 @@
 
 {block name="css"}account_conne.css{/block}
 
-{block name="script"}account_connexion.js{/block}
+{block name="script"}account_connexion{/block}
 
 
 {block name="title"}Ani-bankai{/block}
