@@ -1,11 +1,33 @@
-document.addEventListener("click", validateMail)
+
+
+let error__close = document.getElementById("error__close");
+error__close.addEventListener("click", function() {
+    console.log("LAAAAA3AAAA")
+    //error.style.display = "none";
+    error.classList.add("error-hide");
+});
+
+let idForm = document.getElementById("formCreation")
+idForm.addEventListener("click", validateMail);
+
+function errorPopUp(message = "") {
+    console.log("hop la")
+    let error = document.getElementById("error");
+    if (true) {
+        console.log("mais frere")
+        //error.style.display = "block";
+        error.classList.remove("error-hide");
+        error.classList.add("error-show");
+        error.innerHTML = message;
+    } 
+}
 
 function validateMail() {
-    let error = document.getElementById("error");
-    error.classList.add("error-show");
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value)
+
+    errorPopUp("Veuillez entrer une adresse mail valide");
 
     console.log(email);
 
@@ -93,7 +115,7 @@ let email_confirmation = document.getElementById('email1');
 let password = document.getElementById('password');
 let password_confirmation = document.getElementById('password1');
 
-
+/*
 function validateEmail() {
     console.log("test");
     console.log(email.value);
@@ -115,4 +137,4 @@ function validatePassword() {
 }
 
 
-document.addEventListener("click", validateEmail);
+document.addEventListener("click", validateEmail);*/
