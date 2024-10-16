@@ -1,21 +1,23 @@
-
-// valider le code postal
+document.addEventListener("click", validateMail)
 
 function validateMail() {
-    let mail = document.getElementById('mail');
+    let error = document.getElementById("error");
+    error.classList.add("error-show");
+    let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-    let validation = RegMail.test(codePostal.value)
+    let validation = RegMail.test(email.value)
+
+    console.log(email);
 
     if (validation) {
-        mail.style.border = "none";
+        email.style.border = "none";
         return true;
     }
 
     else {
-
-        mail.style.borderStyle = "solid";
-        mail.style.borderWidth = "1px";
-        mail.style.borderColor = "red";
+        email.style.borderStyle = "solid";
+        email.style.borderWidth = "1px";
+        email.style.borderColor = "red";
         return false
     };
 }
