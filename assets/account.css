@@ -53,6 +53,11 @@ form p.inscription span {
     color: #eb7371;
 }
 
+form .deco_cree {
+    color: #eb7371;
+    text-decoration:none
+}
+
 form button {
     padding: 15px 25px;
     border-radius: 5px;

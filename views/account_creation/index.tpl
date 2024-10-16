@@ -1,8 +1,6 @@
 {extends file="views/templates/account.tpl"}
 
-{block name="css"}account_conne.css{/block}
-
-{block name="script"}account_connexion.js{/block}
+{block name="script"}account_creation{/block}
 
 
 {block name="title"}Ani-bankai{/block}

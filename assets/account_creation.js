@@ -83,3 +83,34 @@ function sendCreation() {
 
 let send = document.getElementById("formCreation");
 send.addEventListener('submit', sendCreation);
+
+
+let email = document.getElementById('email');
+let email_confirmation = document.getElementById('email1');
+
+let password = document.getElementById('password');
+let password_confirmation = document.getElementById('password1');
+
+
+function validateEmail() {
+    console.log("test");
+    console.log(email.value);
+    console.log(email_confirmation.value);
+    if (email.value != email_confirmation.value) {
+        console.log("jsuisla");
+        email_confirmation.setCustomValidity("Les emails ne correspondent pas");
+    } else {
+        email_confirmation.setCustomValidity('');
+    }
+}
+
+function validatePassword() {
+    if (password.value != password_confirmation.value) {
+        password_confirmation.setCustomValidity("Les mots de passe ne correspondent pas");
+    } else {
+        password_confirmation.setCustomValidity('');
+    }
+}
+
+
+document.addEventListener("click", validateEmail);

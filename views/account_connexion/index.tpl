@@ -19,7 +19,7 @@
             <input type="password" placeholder="Mot de passe">
         </div>
 
-        <p class="inscription">Je n'ai pas de <span>compte</span>. Je m'en <span> <a class="deco-cree" href="account_creation"> crée</a> </span> un.</p>
+        <p class="inscription">Je n'ai pas de <span>compte</span>. Je m'en <span> <a class="deco_cree" href="account_creation"> crée</a> </span> un.</p>
         <div align="center">
             <button type="submit">Se connecter</button>
         </div>

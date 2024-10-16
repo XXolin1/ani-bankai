@@ -1,5 +1,5 @@
+/*
 document.addEventListener("click", validateMail)
-
 
 // valider le code postal
 
@@ -21,3 +21,9 @@ function validateMail() {
         return false
     };
 }
+*/
+
+
+
+
+
