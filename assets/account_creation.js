@@ -2,23 +2,26 @@
 
 let error__close = document.getElementById("error__close");
 error__close.addEventListener("click", function() {
-    console.log("LAAAAA3AAAA")
-    //error.style.display = "none";
+    error.classList.remove("error-show");
     error.classList.add("error-hide");
 });
 
 let idForm = document.getElementById("formCreation")
-idForm.addEventListener("click", validateMail);
+
+// Test event listener
+//idForm.addEventListener("click", validateMail);
+//idForm.addEventListener("click", passwordCheck);
+// Fin test event listener
+
 
 function errorPopUp(message = "") {
-    console.log("hop la")
     let error = document.getElementById("error");
     if (true) {
+        let error_message = document.getElementById("error__title");
         console.log("mais frere")
-        //error.style.display = "block";
         error.classList.remove("error-hide");
         error.classList.add("error-show");
-        error.innerHTML = message;
+        error_message.innerHTML = message;
     } 
 }
 
@@ -27,9 +30,7 @@ function validateMail() {
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value)
 
-    errorPopUp("Veuillez entrer une adresse mail valide");
-
-    console.log(email);
+    //errorPopUp("Veuillez entrer une adresse mail valide !!");
 
     if (validation) {
         email.style.border = "none";
@@ -49,92 +50,110 @@ function validateMail() {
 function checkPseudo() {
     let pseudo = document.getElementById("pseudo").value;
     if (pseudo == "") {
-        alert("ta pas de pseudo mec?")
+        errorPopUp("Veuillez entrez un pseudo !!")
     }
 }
 
-
-// check mail
-
-function mailCheck() {
-    let email = document.getElementById("email").value;
-    let email1 = document.getElementById("email1").value;
-
-    if (email != "") {
-        if (email == email1) {
-            alert("OE PAPAPAPA (mail)");
-            return true;
-        }
-        else {
-            alert("ta grand mere le mail c pas le mm wsh");
-            return false;
-        }
-    }
-    alert("met un mail connard");
-    return false;
-}
 
 // check password
 
 function passwordCheck() {
 
-    let password = document.getElementById("password").value;
-    let password1 = document.getElementById("password1").value;
+    let password = document.getElementById("password");
+    let password1 = document.getElementById("password1");
 
-    if (password != "") {
-        if (password == password1) {
-            alert("OE PAPAPAPA");
+
+    if (password.value != "") {
+        if (password.value == password1.value) {
             return true;
         }
         else {
-            alert("ta grand mere le mdp c pas le mm wsh");
+            errorPopUp("Les mots de passes ne correspondent pas !!");
             return false;
         }
     }
-    alert("met un mdp connard");
+    password.style.borderStyle = "solid";
+    password.style.borderWidth = "1px";
+    password.style.borderColor = "red";
+    errorPopUp("Mot de passe requis !!");
     return false;
 }
 
+let submit = document.getElementById("submit");
+submit.addEventListener("click", sendCreation);
 
 function sendCreation() {
+    validateMail();
     passwordCheck();
-    mailCheck();
     checkPseudo();
 }
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+        const pseudo = form.querySelector("input[type='text']").value;
+        const email = form.querySelector("input[type='email']").value;
+        const age = form.querySelector("input[type='number']").value;
+        const password = form.querySelector("input[type='password']").value;
+        alert("test");
+
+        // Vous pouvez maintenant utiliser les valeurs d'email et de mot de passe pour effectuer des actions, comme l'envoi à un serveur via une requête AJAX, par exemple
+        console.log("login:", pseudo);
+        console.log("email:", email);
+        console.log("age:", age);
+        console.log("password:", password);
+        //alert(login, password);
+        accountCreation(pseudo, password, email, age);
+    });
+});
 
 
-let send = document.getElementById("formCreation");
-send.addEventListener('submit', sendCreation);
+function accountCreation(pseudo, password, email, age) {
+    try {
+        alert("ok pour le debut");
+        fetch("/ani-bankai/api/creation", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                pseudo: pseudo, 
+                password: password,
+                email: email,
+                age: age
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erreur: ${response.status}`);
+                }
+                return response.text(); // Retourne la promesse du texte de la réponse
+            })
+            /*
+            .then(text => {
+                console.log(text); // Affiche le texte reçu de la réponse
+                
+                if (text === "true") {
+                    console.log("mais je crois que ca marche !!");
+                    window.location.replace("/accueil");
+                }
+                else {
+                    console.log("La réponse n'est pas true.");
+                }
+            })
+                */
 
+            .catch(error => {
+                console.log("Erreur:", error);
+                //window.location.replace("http://localhost/Projet/compte.html");
+            });
 
-let email = document.getElementById('email');
-let email_confirmation = document.getElementById('email1');
-
-let password = document.getElementById('password');
-let password_confirmation = document.getElementById('password1');
-
-/*
-function validateEmail() {
-    console.log("test");
-    console.log(email.value);
-    console.log(email_confirmation.value);
-    if (email.value != email_confirmation.value) {
-        console.log("jsuisla");
-        email_confirmation.setCustomValidity("Les emails ne correspondent pas");
-    } else {
-        email_confirmation.setCustomValidity('');
+    } catch (error) {
+        console.log("Test d'erreur:", error);
+        
     }
 }
-
-function validatePassword() {
-    if (password.value != password_confirmation.value) {
-        password_confirmation.setCustomValidity("Les mots de passe ne correspondent pas");
-    } else {
-        password_confirmation.setCustomValidity('');
-    }
-}
-
-
-document.addEventListener("click", validateEmail);*/

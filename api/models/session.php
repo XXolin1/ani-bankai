@@ -6,8 +6,10 @@ require_once("./class/BdBase.php");
 class Authentication extends BdBase 
 {
 
-    private $username;
+    private $pseudo;
     private $password;
+    private $age;
+    private $email;
     private $req;
     private $data;
 
@@ -17,6 +19,20 @@ class Authentication extends BdBase
         parent::__construct();
 
         header("Content-type: text/plain");
+    }
+
+    public function creation()
+    {
+        if (!isset($_POST["login"], $_POST["password"], $_POST["email"], $_POST["age"])) {
+            exit(0);
+        }
+        $this->pseudo = $_POST["login"];
+        $this->password = $_POST["password"];
+        $this->email = $_POST["email"];
+        $this->age = $_POST["age"];
+
+        
+
     }
 
     public function connexion()

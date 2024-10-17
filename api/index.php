@@ -23,10 +23,17 @@ try {
 
         switch ($url[0]) {
 
+            case "creation":
+                require_once ("./models/accountCreation.php");
+                $reqCreation = new AccountCreation(); 
+                $Creation = $reqCreation->creation(); 
+                CheckConnexion($Creation);
+                exit(0);
+
             case "connexion":
-                require_once ("./class/session.php");
-                $reqConnexion = new Authentication(); // parametre a verifier ca amrche
-                $Connexion = $reqConnexion->connexion(); // mais pas la
+                require_once ("./models/session.php");
+                $reqConnexion = new Authentication();
+                $Connexion = $reqConnexion->connexion(); 
                 CheckConnexion($Connexion);
                 exit(0);
 

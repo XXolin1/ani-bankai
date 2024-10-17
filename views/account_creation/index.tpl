@@ -23,7 +23,7 @@
         <p class="choose-email">Veuillez entrer vos informations :</p>
 
         <div class="inputs">
-            <input id="pseudo" type="pseudo" placeholder="Pseudo">
+            <input id="pseudo" type="text" placeholder="Pseudo">
             <input id="age" type="number" placeholder="Veuillez entrer votre age">
             <input id="email" type="email" placeholder="Email" />
             <input id="password" type="password" placeholder="Mot de passe">
@@ -31,9 +31,9 @@
         </div>
 
        
-        <div align="center">
-            <button type="submit">Se connecter</button>
-        </div>
+        
+        <button id="submit" type="submit">Se connecter</button>
+        
     </form>
 
 {/block}
