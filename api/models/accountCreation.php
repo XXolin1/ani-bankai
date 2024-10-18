@@ -25,6 +25,7 @@ class AccountCreation extends BdBase {
         if (!isset($_POST["pseudo"], $_POST["password"], $_POST["email"], $_POST["age"])) {
             exit(0);
         }
+        
         $this->pseudo = $_POST["pseudo"];
         $this->password = $_POST["password"];
         $this->email = $_POST["email"];

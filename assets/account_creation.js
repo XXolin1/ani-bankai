@@ -83,9 +83,12 @@ let submit = document.getElementById("submit");
 submit.addEventListener("click", sendCreation);
 
 function sendCreation() {
-    validateMail();
-    passwordCheck();
-    checkPseudo();
+    let responseMail = validateMail();
+    let responsePassword = passwordCheck();
+    let responsePseudo = checkPseudo();
+    if (responseMail && responsePassword && responsePseudo) {
+        return true;
+    }
 }
 
 
@@ -99,22 +102,23 @@ document.addEventListener("DOMContentLoaded", function() {
         const email = form.querySelector("input[type='email']").value;
         const age = form.querySelector("input[type='number']").value;
         const password = form.querySelector("input[type='password']").value;
-        alert("test");
 
         // Vous pouvez maintenant utiliser les valeurs d'email et de mot de passe pour effectuer des actions, comme l'envoi à un serveur via une requête AJAX, par exemple
         console.log("login:", pseudo);
         console.log("email:", email);
         console.log("age:", age);
         console.log("password:", password);
-        //alert(login, password);
-        accountCreation(pseudo, password, email, age);
+        
+        if (sendCreation()) {
+            accountCreation(pseudo, password, email, age);
+        }
+        return;
     });
 });
 
 
 function accountCreation(pseudo, password, email, age) {
     try {
-        alert("ok pour le debut");
         fetch("/ani-bankai/api/creation", {
             method: "POST",
             headers: {
