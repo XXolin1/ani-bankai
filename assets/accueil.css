@@ -2,7 +2,7 @@ html{
     height: 100%;
 }
 body {
-    background-image: url(/ani-bankai/images/fond_principal.png);  background-size: cover;
+    background-image: url(/ani-bankai/images/Demonslayer.png); background-size: cover;    
 }
   
 
@@ -16,30 +16,89 @@ main {
     align-items: start;
     height: 100%;
     width: 100%;
-    background-image: url(/ani-bankai/images/Demonslayer.png); background-size: cover;    
+    
 }
 
 .title{
     font-size: 3em;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: white;
+    color: rgb(255, 255, 255);
     text-align: center;
     text-shadow: 0px 0px 4px black;
 }
 
 .blur{
     display: flex;
+    position: relative;
     justify-content: space-around;
-    height: 50%;
+    align-items: center;
+    height: 30%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.769);
+    background-color: rgb(51, 51, 51);
 
 }
 
+/*head anime*/
 .anime{
-    background-image: url(/ani-bankai/images/Demonslayerpp.png); background-size: cover;
-    width: 20%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    max-width: 260px;
+    background-image: url(/ani-bankai/images/Demonslayerpp.png); 
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 93%;
+    width: 225px;
+    margin-right: 4%;
+    margin-left: 4%;
+    flex-shrink: 0;
+    border-radius: 7px;
 }
+
+
+/*abstract*/
+.trending{
+    display: flex;
+    position: absolute;
+    top: -40%;
+    height: 130%;
+    overflow: auto;
+    width: 100% ;
+}
+
+.trending::-webkit-scrollbar{
+    height: 12px; /* Hauteur de la scrollbar horizontale */
+    width: 10px;  /* Largeur de la scrollbar verticale */
+}
+
+.trending::-webkit-scrollbar-thumb {
+    background-color: #b6b6b6; /* Couleur de la barre */
+    border-radius: 5px; /* Coins arrondis */
+  }
+  
+  .trending::-webkit-scrollbar-track {
+    background-color: #f1f1f100; /* Couleur de la piste */
+  }
+  
+  /* Modifier la couleur au survol */
+  .trending::-webkit-scrollbar-thumb:hover {
+    background-color: #8f8f8f;
+  }
+
+
+button.prev, button.next {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+

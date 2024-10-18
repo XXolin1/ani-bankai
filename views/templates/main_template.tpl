@@ -19,6 +19,7 @@
   <title>Ani-bankai - {block name="title"}default{/block}</title>
 
   <script src="assets/{block name="script"}{/block}.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/1.0.0-alpha/lib/vibrant.min.js"></script>
 
 
 
@@ -50,11 +51,6 @@
 
   {block name="content"}{/block}
 
-    <footer>
-
-        <div id="scrollup"> </div>
-
-    </footer>
 
 </body>
 

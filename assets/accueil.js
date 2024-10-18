@@ -127,7 +127,6 @@ animeDetails.addEventListener("mouseenter", () => {
 })
 
 
-
 function getColor(sourceImage){
     // Get the source element's style
     var style = sourceImage.currentStyle || window.getComputedStyle(sourceImage, false)
@@ -144,11 +143,27 @@ function getColor(sourceImage){
     let colorThief = new ColorThief();
     // Get the dominant color of the source image
     let color = colorThief.getColor(img);
+    let palette = colorThief.getPalette(img);
     // Sets the background color and remove the background image
-    background.style.backgroundColor = "rgba(" + color + ",0.6800000071525574)";
+    background.style.backgroundColor = "rgba(" + color + ",0.90)";
     background.style.backgroundImage = 'none';
+    console.log(color);
+    console.log(palette);
+    sortbrightness(palette);
 }
 
+function sortbrightness(a) {
+    let brarray = [];
+    a.forEach(element => {
+        let br = 0.2126*parseInt(element[0])+0.7152*parseInt(element[1])+0.0722*parseInt(element[2]);
+        brarray.push([br, element]);
+    });
+    console.log(brarray);
+    brarray.sort();
+    console.log(brarray);
+
+
+}   
 
 //})
 
