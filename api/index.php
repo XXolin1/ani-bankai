@@ -21,6 +21,24 @@ try {
             }
         }
 
+        // a dev pour opti l'index + dynamique
+        /*
+        $dict = [
+            "creation" => "accountCreation",
+            "session" => "Authentication"
+        ];
+
+        foreach ($dict as $key => $value) {
+            if ($url[0] == $key) {
+                require_once ("./models/" . $value . ".php");
+                $req = new $value();
+                $response = $req->$key();
+                sendResponse($response);
+                exit(0);
+            }
+        }
+        throw new Exception("La demande n'est pas valide, vérifiez l'url");
+        */
         switch ($url[0]) {
 
             case "creation":

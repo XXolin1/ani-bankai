@@ -31,7 +31,6 @@
         </div>
 
        
-        
         <button id="submit" type="submit">Se connecter</button>
         
     </form>
