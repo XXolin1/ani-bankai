@@ -147,35 +147,31 @@ function getColor(sourceImage){
     // Sets the background color and remove the background image
     background.style.backgroundColor = "rgba(" + color + ",0.90)";
     background.style.backgroundImage = 'none';
-    console.log(color);
-    console.log(palette);
-    sortbrightness(palette);
+    sortbrightness(palette,color);
 }
 
-function sortbrightness(a) {
+function sortbrightness(palette,color) {
     let brarray = [];
-    a.forEach(element => {
+    palette.forEach(element => {
         let br = 0.2126*parseInt(element[0])+0.7152*parseInt(element[1])+0.0722*parseInt(element[2]);
         brarray.push([br, element]);
     });
     brarray.sort((a, b) => a[0] - b[0]);
-    applycolor(brarray);
+    applycolor(brarray,color);
 
 }   
 
-function applycolor(array){
-    let button = document.getElementsByClassName("button");
-    console.log(button);
-    let color1=array[array.length-1][1];
-    button.forEach(element => {
+function applycolor(array,color) {
+    let buttons = document.getElementsByClassName("button");
+    let pp = document.getElementById("profil");
+    let color1 = array[array.length - 1][1];
+    Array.from(buttons).forEach(element => {
         element.style.backgroundColor = `rgba(${color1[0]},${color1[1]},${color1[2]})`;
     });
-
+    if((0.2126*parseInt(color[0])+0.7152*parseInt(color[1])+0.0722*parseInt(color[2])) < 128){ // brightness calcul the treshold is 128 below that the color is considered as dark
+        pp.style.filter = "invert(100%)"; // change the profile picture in white 
+    }
 }
 
+
 //})
-
-
-
-
-
