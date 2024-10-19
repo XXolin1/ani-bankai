@@ -158,12 +158,20 @@ function sortbrightness(a) {
         let br = 0.2126*parseInt(element[0])+0.7152*parseInt(element[1])+0.0722*parseInt(element[2]);
         brarray.push([br, element]);
     });
-    console.log(brarray);
-    brarray.sort();
-    console.log(brarray);
-
+    brarray.sort((a, b) => a[0] - b[0]);
+    applycolor(brarray);
 
 }   
+
+function applycolor(array){
+    let button = document.getElementsByClassName("button");
+    console.log(button);
+    let color1=array[array.length-1][1];
+    button.forEach(element => {
+        element.style.backgroundColor = `rgba(${color1[0]},${color1[1]},${color1[2]})`;
+    });
+
+}
 
 //})
 
