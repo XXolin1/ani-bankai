@@ -41,11 +41,11 @@ try {
         */
         switch ($url[0]) {
 
-            case "creation":
-                require_once ("./models/accountCreation.php");
-                $reqCreation = new AccountCreation(); 
-                $Creation = $reqCreation->creation(); 
-                CheckConnexion($Creation);
+            case "accountCreation":
+                require_once ("./controllers/controllerAccountCreation.php");
+                $reqCreation = new ControllerAccountCreation($parametreGet, $url); // faire controller
+                $Creation = $reqCreation->controller(); 
+                sendResponse($Creation);
                 exit(0);
 
             case "connexion":

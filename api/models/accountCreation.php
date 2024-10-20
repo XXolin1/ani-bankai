@@ -4,27 +4,44 @@ session_start();
 
 require_once("./models/BdBase.php");
 
-class AccountCreation extends BdBase {
-    
-        private $pseudo;
-        private $password;
-        private $age;
-        private $email;
-        private $req;
-        private $data;
+class AccountCreation extends BdBase
+{
+    private $pseudo;
+    private $password;
+    private $age;
+    private $email;
+    private $req;
+    private $data;
 
-    public function __construct()
+    public function __construct($param)
     {
         parent::__construct();
 
-        header("Content-type: text/plain");
+        foreach ($param as $key => $value) {
+            // Assigner la valeur de $param à la propriété de l'objet
+            $this->$key = $value;
+        }
+
+        // pour le POST
+        $data = array(
+            "pseudo",
+            "password",
+            "email",
+            "age"
+        );
+
+        foreach ($data as $element) {
+            if (isset ($_POST[$element])) {
+                $this->{$element} = $_POST[$element];
+            }
+        }
     }
 
     public function creation()
     {
-        if (!isset($_POST["pseudo"], $_POST["password"], $_POST["email"], $_POST["age"])) {
-            exit(0);
-        }
+        //if (!isset($_POST["pseudo"], $_POST["password"], $_POST["email"], $_POST["age"])) {
+        //    exit(0);
+        //}
         
         $this->pseudo = $_POST["pseudo"];
         $this->password = $_POST["password"];
@@ -40,6 +57,18 @@ class AccountCreation extends BdBase {
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':age', $this->age);
+
+        $this->prepaQuery($stmt);
+        return $this->data;
+    }
+
+    public function email()
+    {
+        $this->req = "SELECT EXISTS (SELECT 1 FROM `users` WHERE mail = :email) AS email_exists;";
+
+        $stmt = $this->conn->prepare($this->req);
+
+        $stmt->bindParam(':email', $this->email);
 
         $this->prepaQuery($stmt);
         return $this->data;

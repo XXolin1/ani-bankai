@@ -1,10 +1,10 @@
 
 
-let error__close = document.getElementById("error__close");
-error__close.addEventListener("click", function() {
-    error.classList.remove("error-show");
-    error.classList.add("error-hide");
-});
+let error_close = document.getElementById("error__close");
+//error__close.addEventListener("click", function() {
+//    error.classList.remove("error-show");
+//    error.classList.add("error-hide");
+//});
 
 let idForm = document.getElementById("formCreation")
 
@@ -12,6 +12,13 @@ let idForm = document.getElementById("formCreation")
 //idForm.addEventListener("click", validateMail);
 //idForm.addEventListener("click", passwordCheck);
 // Fin test event listener
+
+error_close.addEventListener("click", errorPopUpClose);
+
+function errorPopUpClose() {
+    error.classList.remove("error-show");
+    error.classList.add("error-hide");
+}
 
 
 function errorPopUp(message = "") {
@@ -28,9 +35,7 @@ function errorPopUp(message = "") {
 function validateMail() {
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-    let validation = RegMail.test(email.value)
-
-    //errorPopUp("Veuillez entrer une adresse mail valide !!");
+    let validation = RegMail.test(email.value);
 
     if (validation) {
         email.style.border = "none";
@@ -38,6 +43,7 @@ function validateMail() {
     }
 
     else {
+        errorPopUp("Veuillez entrez une adresse mail valide !!")
         email.style.borderStyle = "solid";
         email.style.borderWidth = "1px";
         email.style.borderColor = "red";
@@ -48,10 +54,29 @@ function validateMail() {
 // check pseudo
 
 function checkPseudo() {
-    let pseudo = document.getElementById("pseudo").value;
-    if (pseudo == "") {
+    let pseudo = document.getElementById("pseudo");
+    if (pseudo.value == "") {
         errorPopUp("Veuillez entrez un pseudo !!")
+        pseudo.style.borderStyle = "solid";
+        pseudo.style.borderWidth = "1px";
+        pseudo.style.borderColor = "red";
+        return false;
     }
+    pseudo.style.border = "none";
+    return true;
+}
+
+function checkAge() {
+    let age = document.getElementById("age");
+    if (age.value == "") {
+        errorPopUp("Veuillez entrez votre age !!")
+        age.style.borderStyle = "solid";
+        age.style.borderWidth = "1px";
+        age.style.borderColor = "red";
+        return false;
+    }
+    age.style.border = "none";
+    return true;
 }
 
 
@@ -65,6 +90,7 @@ function passwordCheck() {
 
     if (password.value != "") {
         if (password.value == password1.value) {
+            password.style.border = "none";
             return true;
         }
         else {
@@ -83,10 +109,11 @@ let submit = document.getElementById("submit");
 submit.addEventListener("click", sendCreation);
 
 function sendCreation() {
-    let responseMail = validateMail();
-    let responsePassword = passwordCheck();
-    let responsePseudo = checkPseudo();
-    if (responseMail && responsePassword && responsePseudo) {
+    //checkAge();
+    //validateMail();
+    //passwordCheck();
+    //checkPseudo();
+    if (checkPseudo() && checkAge() && validateMail() && passwordCheck()) {
         return true;
     }
 }
@@ -104,10 +131,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const password = form.querySelector("input[type='password']").value;
 
         // Vous pouvez maintenant utiliser les valeurs d'email et de mot de passe pour effectuer des actions, comme l'envoi à un serveur via une requête AJAX, par exemple
-        console.log("login:", pseudo);
-        console.log("email:", email);
-        console.log("age:", age);
-        console.log("password:", password);
+        //console.log("login:", pseudo);
+        //console.log("email:", email);
+        //console.log("age:", age);
+        //console.log("password:", password);
         
         if (sendCreation()) {
             accountCreation(pseudo, password, email, age);
@@ -119,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function accountCreation(pseudo, password, email, age) {
     try {
-        fetch("/ani-bankai/api/creation", {
+        fetch("/ani-bankai/api/accountCreation/creation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
