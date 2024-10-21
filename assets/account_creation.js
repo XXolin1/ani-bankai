@@ -44,7 +44,7 @@ function validateMail() {
             .then((response) => {
                 return response.json();
             })
-            .then((data) => { // BUG ICIIIIIIIIIIII
+            .then((data) => { // BUG ICIIIIIIIIIII
                 if (data[0].email_exists) { // check si l'email existe déjà
                     errorPopUp("Adresse mail déjà utilisée !!")
                     email.style.borderStyle = "solid";
