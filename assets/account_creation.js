@@ -29,7 +29,7 @@ function errorPopUp(message = "") {
         error.classList.remove("error-hide");
         error.classList.add("error-show");
         error_message.innerHTML = message;
-    } 
+    }
 }
 
 function validateMail() {
@@ -39,7 +39,28 @@ function validateMail() {
 
     if (validation) {
         email.style.border = "none";
-        return true;
+
+        fetch("/ani-bankai/api/accountCreation/email?email=" + email.value)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => { // BUG ICIIIIIIIIIIII
+                if (data[0].email_exists) { // check si l'email existe déjà
+                    errorPopUp("Adresse mail déjà utilisée !!")
+                    email.style.borderStyle = "solid";
+                    email.style.borderWidth = "1px";
+                    email.style.borderColor = "red";
+                    console.log("ici");
+                    return false;
+                }
+                else {
+                    email.style.border = "none";
+                    return true;
+                }
+            });
+
+
+        
     }
 
     else {
@@ -105,24 +126,11 @@ function passwordCheck() {
     return false;
 }
 
-let submit = document.getElementById("submit");
-submit.addEventListener("click", sendCreation);
 
-function sendCreation() {
-    //checkAge();
-    //validateMail();
-    //passwordCheck();
-    //checkPseudo();
-    if (checkPseudo() && checkAge() && validateMail() && passwordCheck()) {
-        return true;
-    }
-}
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 
         const pseudo = form.querySelector("input[type='text']").value;
@@ -135,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //console.log("email:", email);
         //console.log("age:", age);
         //console.log("password:", password);
-        
+
         if (sendCreation()) {
             accountCreation(pseudo, password, email, age);
         }
@@ -151,8 +159,8 @@ function accountCreation(pseudo, password, email, age) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body : JSON.stringify({
-                pseudo: pseudo, 
+            body: JSON.stringify({
+                pseudo: pseudo,
                 password: password,
                 email: email,
                 age: age
@@ -185,6 +193,17 @@ function accountCreation(pseudo, password, email, age) {
 
     } catch (error) {
         console.log("Test d'erreur:", error);
-        
+
+    }
+}
+
+
+//let submit = document.getElementById("submit");
+//submit.addEventListener("click", sendCreation);
+
+function sendCreation() {
+    console.log("sendCreation");
+    if (checkPseudo() && checkAge() && validateMail() && passwordCheck()) {
+        return true;
     }
 }
