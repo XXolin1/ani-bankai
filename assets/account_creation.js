@@ -36,6 +36,7 @@ function validateMail() {
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value);
+    let finalResponse = false;
 
     if (validation) {
         email.style.border = "none";
@@ -51,18 +52,21 @@ function validateMail() {
                     email.style.borderWidth = "1px";
                     email.style.borderColor = "red";
                     console.log("ici");
-                    return false;
+                    alert("c'est faaaalse");
+                    finalResponse = false;
                 }
                 else {
+                    console.log("euuuh, wsh?")
                     email.style.border = "none";
-                    return true;
+                    alert("c'est truuuuue");
+                    finalResponse = true;
                 }
             });
-
-
         
+        console.log("OEEE ALLER LA OH!!", finalResponse);
+        return finalResponse;
     }
-
+    
     else {
         errorPopUp("Veuillez entrez une adresse mail valide !!")
         email.style.borderStyle = "solid";
@@ -172,20 +176,7 @@ function accountCreation(pseudo, password, email, age) {
                 }
                 return response.text(); // Retourne la promesse du texte de la réponse
             })
-            /*
-            .then(text => {
-                console.log(text); // Affiche le texte reçu de la réponse
-                
-                if (text === "true") {
-                    console.log("mais je crois que ca marche !!");
-                    window.location.replace("/accueil");
-                }
-                else {
-                    console.log("La réponse n'est pas true.");
-                }
-            })
-                */
-
+  
             .catch(error => {
                 console.log("Erreur:", error);
                 //window.location.replace("http://localhost/Projet/compte.html");
@@ -202,7 +193,8 @@ function accountCreation(pseudo, password, email, age) {
 //submit.addEventListener("click", sendCreation);
 
 function sendCreation() {
-    console.log("sendCreation");
+    alert(validateMail());
+    alert(checkPseudo());
     if (checkPseudo() && checkAge() && validateMail() && passwordCheck()) {
         return true;
     }
