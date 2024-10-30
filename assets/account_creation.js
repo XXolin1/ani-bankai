@@ -32,7 +32,7 @@ function errorPopUp(message = "") {
     }
 }
 
-function validateMail() {
+async function validateMail() {
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value);
@@ -40,28 +40,23 @@ function validateMail() {
     if (validation) {
         email.style.border = "none";
 
-        fetch("/ani-bankai/api/accountCreation/email?email=" + email.value)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => { // BUG ICIIIIIIIIIII
-                if (data[0].email_exists) { // check si l'email existe déjà
-                    errorPopUp("Adresse mail déjà utilisée !!")
-                    email.style.borderStyle = "solid";
-                    email.style.borderWidth = "1px";
-                    email.style.borderColor = "red";
-                    console.log("ici");
-                    return false;
-                }
-                else {
-                    email.style.border = "none";
-                    return true;
-                }
-            });
-
-
-        
-    }
+        let response = await fetch("/ani-bankai/api/accountCreation/email?email=" + email.value)
+            let data = await response.json();
+            console.log("data : ", data);
+            console.log("data 0 ou 1 : " +  data[0].email_exists);
+            if (data[0].email_exists == 1) { // check si l'email existe déjà
+                errorPopUp("Adresse mail déjà utilisée !!")
+                email.style.borderStyle = "solid";
+                email.style.borderWidth = "1px";
+                email.style.borderColor = "red";
+                console.log("ici");
+                return false;
+            }
+            else {
+                email.style.border = "none";
+                return true;
+            }
+        }
 
     else {
         errorPopUp("Veuillez entrez une adresse mail valide !!")
@@ -70,6 +65,7 @@ function validateMail() {
         email.style.borderColor = "red";
         return false
     };
+    alert("bah non!!")
 }
 
 // check pseudo
@@ -130,7 +126,7 @@ function passwordCheck() {
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 
         const pseudo = form.querySelector("input[type='text']").value;
@@ -138,21 +134,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const age = form.querySelector("input[type='number']").value;
         const password = form.querySelector("input[type='password']").value;
 
-        // Vous pouvez maintenant utiliser les valeurs d'email et de mot de passe pour effectuer des actions, comme l'envoi à un serveur via une requête AJAX, par exemple
-        //console.log("login:", pseudo);
-        //console.log("email:", email);
-        //console.log("age:", age);
-        //console.log("password:", password);
+        console.log("test : ", await sendCreation());
 
-        if (sendCreation()) {
-            accountCreation(pseudo, password, email, age);
+        if (await sendCreation()) {
+            await accountCreation(pseudo, password, email, age);
         }
         return;
     });
 });
 
 
-function accountCreation(pseudo, password, email, age) {
+async function accountCreation(pseudo, password, email, age) {
     try {
         fetch("/ani-bankai/api/accountCreation/creation", {
             method: "POST",
@@ -172,19 +164,6 @@ function accountCreation(pseudo, password, email, age) {
                 }
                 return response.text(); // Retourne la promesse du texte de la réponse
             })
-            /*
-            .then(text => {
-                console.log(text); // Affiche le texte reçu de la réponse
-                
-                if (text === "true") {
-                    console.log("mais je crois que ca marche !!");
-                    window.location.replace("/accueil");
-                }
-                else {
-                    console.log("La réponse n'est pas true.");
-                }
-            })
-                */
 
             .catch(error => {
                 console.log("Erreur:", error);
@@ -197,13 +176,12 @@ function accountCreation(pseudo, password, email, age) {
     }
 }
 
-
-//let submit = document.getElementById("submit");
-//submit.addEventListener("click", sendCreation);
-
-function sendCreation() {
-    console.log("sendCreation");
-    if (checkPseudo() && checkAge() && validateMail() && passwordCheck()) {
+async function sendCreation() {
+    console.log(await validateMail());
+    if (checkPseudo() && checkAge() && await validateMail() && passwordCheck()) {
         return true;
+    }
+    else {
+        return false;
     }
 }
