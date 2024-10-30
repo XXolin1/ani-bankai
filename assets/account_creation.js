@@ -36,6 +36,7 @@ async function validateMail() {
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value);
+    let finalResponse = false;
 
     if (validation) {
         email.style.border = "none";
