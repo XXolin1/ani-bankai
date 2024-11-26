@@ -137,6 +137,7 @@ main{
 }
 
 .button_left {
+  font-size: 13px;
   margin-left: 6%;
   background-color: #376ecd;
   color: #ffffff;
@@ -196,6 +197,7 @@ main{
 }
 
 .button_right {
+  font-size: 13px;
   color: #ffffff;
   background-color: #376ecd;
   border-radius: 8px;
