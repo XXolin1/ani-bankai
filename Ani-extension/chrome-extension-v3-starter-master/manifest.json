@@ -22,6 +22,7 @@
     },
     "content_scripts": [{
         "js": ["foreground.js"],
-        "matches": ["https://github.com/*"]
+        "matches": ["https://v5.voiranime.com/*","https://*.crunchyroll.com/*"],
+        "all_frames": true
     }]
 }
