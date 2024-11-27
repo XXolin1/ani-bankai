@@ -5,3 +5,8 @@
 // and injected into the same or different pages.
 
 console.log("This prints to the console of the page (injected only if the page url matched)")
+
+// research the title
+
+
+// API request to ani-bankai
