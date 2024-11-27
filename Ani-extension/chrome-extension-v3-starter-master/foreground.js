@@ -4,9 +4,21 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-console.log("This prints to the console of the page (injected only if the page url matched)")
+//console.log('Foreground script running');
+//console.log(location.href);
 
-// research the title
 
 
-// API request to ani-bankai
+let video = document.querySelector('video');
+
+//console.log(video);
+
+video.addEventListener('play', () => {
+  
+});
+// video.duration;
+// video.currentTime;
+
+video.addEventListener('timeupdate', () => {
+  console.log(Math.floor(video.currentTime) );
+});
