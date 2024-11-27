@@ -35,7 +35,7 @@
         </div>
 
         <div class="info_bloc">
-            <div class="list_bloc">list_action</div>
+            <div class="list_bloc"></div>
             <div class="list_like_info">list_action</div>
             <div class="list_bloc">list_action</div>
         </div>

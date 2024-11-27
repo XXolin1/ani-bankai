@@ -25,7 +25,7 @@
         </svg></div>
 </div>
 
-<form>
+    <form>
 
     <h1>Se connecter</h1>
 
