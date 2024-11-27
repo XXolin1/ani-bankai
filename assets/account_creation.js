@@ -36,7 +36,6 @@ async function validateMail() {
     let email = document.getElementById('email');
     let RegMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     let validation = RegMail.test(email.value);
-    let finalResponse = false;
 
     if (validation) {
         email.style.border = "none";
@@ -66,28 +65,27 @@ async function validateMail() {
         email.style.borderColor = "red";
         return false
     };
-    alert("bah non!!")
 }
 
-// check pseudo
+// check username
 
-function checkPseudo() {
-    let pseudo = document.getElementById("pseudo");
-    if (pseudo.value == "") {
-        errorPopUp("Veuillez entrez un pseudo !!")
-        pseudo.style.borderStyle = "solid";
-        pseudo.style.borderWidth = "1px";
-        pseudo.style.borderColor = "red";
+function checkUsername() {
+    let username = document.getElementById("username");
+    if (username.value == "") {
+        errorPopUp("Veuillez entrez un username !!")
+        username.style.borderStyle = "solid";
+        username.style.borderWidth = "1px";
+        username.style.borderColor = "red";
         return false;
     }
-    pseudo.style.border = "none";
+    username.style.border = "none";
     return true;
 }
 
 function checkAge() {
     let age = document.getElementById("age");
-    if (age.value == "") {
-        errorPopUp("Veuillez entrez votre age !!")
+    if (age.value == "" || age.value < 1 || age.value > 120) {
+        errorPopUp("Veuillez entrez un age valide !!")
         age.style.borderStyle = "solid";
         age.style.borderWidth = "1px";
         age.style.borderColor = "red";
@@ -130,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 
-        const pseudo = form.querySelector("input[type='text']").value;
+        const username = form.querySelector("input[type='text']").value;
         const email = form.querySelector("input[type='email']").value;
         const age = form.querySelector("input[type='number']").value;
         const password = form.querySelector("input[type='password']").value;
@@ -138,14 +136,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("test : ", await sendCreation());
 
         if (await sendCreation()) {
-            await accountCreation(pseudo, password, email, age);
+            await accountCreation(username, password, email, age);
         }
         return;
     });
 });
 
 
-async function accountCreation(pseudo, password, email, age) {
+async function accountCreation(username, password, email, age) {
     try {
         fetch("/ani-bankai/api/accountCreation/creation", {
             method: "POST",
@@ -153,7 +151,7 @@ async function accountCreation(pseudo, password, email, age) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                pseudo: pseudo,
+                username: username,
                 password: password,
                 email: email,
                 age: age
@@ -173,13 +171,12 @@ async function accountCreation(pseudo, password, email, age) {
 
     } catch (error) {
         console.log("Test d'erreur:", error);
-
     }
 }
 
 async function sendCreation() {
     console.log(await validateMail());
-    if (checkPseudo() && checkAge() && await validateMail() && passwordCheck()) {
+    if (checkUsername() && checkAge() && await validateMail() && passwordCheck()) {
         return true;
     }
     else {

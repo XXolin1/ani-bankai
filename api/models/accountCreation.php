@@ -6,12 +6,13 @@ require_once("./models/BdBase.php");
 
 class AccountCreation extends BdBase
 {
-    private $pseudo;
+    private $username;
     private $password;
     private $age;
     private $email;
     private $req;
     private $data;
+    private $uid;
 
     public function __construct($param)
     {
@@ -24,36 +25,31 @@ class AccountCreation extends BdBase
 
         // pour le POST
         $data = array(
-            "pseudo",
+            "username",
             "password",
             "email",
             "age"
         );
 
         foreach ($data as $element) {
-            if (isset ($_POST[$element])) {
+            if (isset($_POST[$element])) {
                 $this->{$element} = $_POST[$element];
             }
         }
+        $this->uid = $this->uid();
     }
 
     public function creation()
     {
-        //if (!isset($_POST["pseudo"], $_POST["password"], $_POST["email"], $_POST["age"])) {
-        //    exit(0);
-        //}
-        
-        $this->pseudo = $_POST["pseudo"];
-        $this->password = $_POST["password"];
-        $this->email = $_POST["email"];
-        $this->age = $_POST["age"];
-
-        $this->req = "INSERT INTO users (pseudo, mail, first_name, last_name, password, age)
-                    VALUES (:pseudo, :email, 'testPrenom', 'testNom', :password, :age);";
+        $this->req = "INSERT INTO users (username, uid, mail, first_name, last_name, password, age)
+                    VALUES (:username, :uid ,:email, 'testPrenom', 'testNom', :password, :age);";
 
         $stmt = $this->conn->prepare($this->req);
 
-        $stmt->bindParam(':pseudo', $this->pseudo);
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+
+        $stmt->bindParam(':uid', $this->uid);
+        $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':age', $this->age);
@@ -72,6 +68,25 @@ class AccountCreation extends BdBase
 
         $this->prepaQuery($stmt);
         return $this->data;
+    }
+
+    public function uid()
+    {
+        do {
+            // Génération d'un uid aléatoire de 10 chiffres
+            $randomUid = random_int(0000000000, 9999999999);
+
+            // Requête pour vérifier si le uid existe déjà
+            $this->req = "SELECT COUNT(*) as count FROM `users` WHERE uid = :uid";
+            $stmt = $this->conn->prepare($this->req);
+            $stmt->bindParam(':uid', $randomUid);
+            $stmt->execute();
+
+            // Vérification de l'existence
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        } while ($result['count'] > 0); // Répéter si le uid existe déjà
+
+        return $randomUid;
     }
 
     public function prepaQuery($stmt)
