@@ -20,7 +20,8 @@ class Authentication extends BdBase
 
         header("Content-type: text/plain");
     }
-
+    
+/*
     public function creation()
     {
         if (!isset($_POST["login"], $_POST["password"], $_POST["email"], $_POST["age"])) {
@@ -30,18 +31,12 @@ class Authentication extends BdBase
         $this->password = $_POST["password"];
         $this->email = $_POST["email"];
         $this->age = $_POST["age"];
-
-        
-
     }
+*/
 
     public function connexion()
     {
-        if (!isset($_POST["login"])) {
-            exit(0);
-        }
-
-        if (!isset($_POST["password"])) {
+        if (!isset($_POST["login"], $_POST["password"])) {
             exit(0);
         }
 
