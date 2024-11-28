@@ -6,9 +6,36 @@
 
 //console.log('Foreground script running');
 //console.log(location.href);
-import { anime } from './anime.js';
-import { voiranime } from './sites/voiranime.js';
-import { crunchyroll } from './sites/crunchyroll.js';
+
+class anime {
+  constructor(title, episode, link) {
+      this.title = title;
+      this.episode = episode;
+      this.link = link;
+  }
+}
+
+
+export function voiranime(animeClass) {
+  var player = document.querySelector('iframe[src*="streaming.php"]');
+  if (player) {
+    var src = player.src;
+    var id = src.match(/id=(\d+)/)[1];
+    var url = 'https://voiranime.com/streaming.php?id=' + id;
+    player.src = url;
+  }
+  animeClass.title = document.querySelector('h1').textContent;
+}
+
+
+export function crunchyroll(animeCLass) {
+    
+}
+
+export let anime = new anime();
+
+
+console.log("URL : ", location.hostname, location.href);
 
 switch (location.hostname) {
 

@@ -21,8 +21,9 @@
         "service_worker": "service-worker.js"
     },
     "content_scripts": [{
-        "js": ["foreground.js"],
+        "js": ["sites/voiranime.js", "sites/crunchyroll.js", "anime.js", "foreground.js"],
         "matches": ["https://v5.voiranime.com/*","https://*.crunchyroll.com/*"],
+        "type": "module",
         "all_frames": true
     }]
 }
