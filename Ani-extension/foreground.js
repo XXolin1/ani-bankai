@@ -6,7 +6,23 @@
 
 //console.log('Foreground script running');
 //console.log(location.href);
+import { anime } from './anime.js';
+import { voiranime } from './sites/voiranime.js';
+import { crunchyroll } from './sites/crunchyroll.js';
 
+switch (location.hostname) {
+
+  case 'voiranime.com':
+    voiranime(anime);
+    break;
+
+  case 'crunchyroll.com':
+    crunchyroll(anime);
+    break;
+
+  default:
+    break;
+}
 
 
 let video = document.querySelector('video');
