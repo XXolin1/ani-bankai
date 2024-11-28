@@ -8,15 +8,17 @@
 //console.log(location.href);
 
 class anime {
-  constructor(title, episode, link) {
-      this.title = title;
-      this.episode = episode;
-      this.link = link;
+  constructor() {
+      this.title = "";
+      this.episode = "";
+      this.link = "";
   }
 }
 
+let animeCarac = new anime();
 
-export function voiranime(animeClass) {
+
+function voiranime(animeClass) {
   var player = document.querySelector('iframe[src*="streaming.php"]');
   if (player) {
     var src = player.src;
@@ -27,12 +29,10 @@ export function voiranime(animeClass) {
   animeClass.title = document.querySelector('h1').textContent;
 }
 
-
-export function crunchyroll(animeCLass) {
+function crunchyroll(animeCLass) {
     
 }
 
-export let anime = new anime();
 
 
 console.log("URL : ", location.hostname, location.href);
