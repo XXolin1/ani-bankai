@@ -9,59 +9,123 @@
 
 class anime {
   constructor() {
-      this.title = "";
-      this.episode = "";
-      this.link = "";
+    this.title = "";
+    this.episode = "";
+    this.link = "";
   }
 }
 
 let animeCarac = new anime();
 
 
-function voiranime(animeClass) {
-  var player = document.querySelector('iframe[src*="streaming.php"]');
-  if (player) {
-    var src = player.src;
-    var id = src.match(/id=(\d+)/)[1];
-    var url = 'https://voiranime.com/streaming.php?id=' + id;
-    player.src = url;
-  }
-  animeClass.title = document.querySelector('h1').textContent;
-}
-
-function crunchyroll(animeCLass) {
-    
-}
-
-
-
 console.log("URL : ", location.hostname, location.href);
 
 switch (location.hostname) {
 
-  case 'voiranime.com':
-    voiranime(anime);
+  case 'vidmoly.to':
+    console.log("URL case iframe : ", location.hostname, location.href);
+    voiranime(animeCarac);
     break;
 
-  case 'crunchyroll.com':
-    crunchyroll(anime);
+  case 'v5.voiranime.com':
+    voiranime(animeCarac);
+    break;
+
+  case 'www.crunchyroll.com':
+    crunchyroll(animeCarac);
+
     break;
 
   default:
     break;
 }
 
+function getAnimeCarac() {
+  console.log("getAnimeCarac");
 
-let video = document.querySelector('video');
+  let link = location.href;
+}
 
-//console.log(video);
 
-video.addEventListener('play', () => {
-  
-});
-// video.duration;
-// video.currentTime;
 
-video.addEventListener('timeupdate', () => {
-  console.log(Math.floor(video.currentTime) );
-});
+
+function voiranime(animeClass) {
+
+  if (location.hostname == 'v5.voiranime.com') {
+
+  let link = location.href;
+  let title = link.split("/")[4].split("-").join(" ");
+  let episodeLink = link.split("/")[5];
+  let episode = episodeLink.split("-")[4];
+  let traduction = episodeLink.split("-")[5];
+
+  console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
+  }
+
+
+
+  let video = document.querySelector('video');
+  console.log("Video : ", video)
+  video = document.querySelector('video');
+  console.log("URL case iframe : ", location.hostname, location.href);
+
+  if (video != null) {
+    console.log("Video : ", video);
+    video.addEventListener('play', () => {
+
+    });
+
+    // video.duration;
+    // video.currentTime;
+
+    video.addEventListener('timeupdate', () => {
+      console.log(Math.floor(video.currentTime));
+    });
+  }
+
+
+
+}
+
+
+
+function crunchyroll(animeCLass) {
+  console.log("Crunchyroll");
+}
+
+
+function displayAnimeCarac() {
+  let 
+}
+
+
+// Envoyer un message au service worker
+chrome.runtime.sendMessage(
+  { type: "updatePopup", data: "Message depuis foreground.js" },
+  (response) => {
+      if (chrome.runtime.lastError) {
+          console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+      } else {
+          console.log("Réponse reçue du service worker :", response);
+      }
+  }
+);
+
+
+
+
+
+
+//let video = document.querySelector('video');
+//
+////console.log(video);
+//
+//video.addEventListener('play', () => {
+//
+//});
+//// video.duration;
+//// video.currentTime;
+//
+//video.addEventListener('timeupdate', () => {
+//  console.log(Math.floor(video.currentTime) );
+//});

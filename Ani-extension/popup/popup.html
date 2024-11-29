@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
     <title>Ani-Extension</title>
 </head>
 
@@ -18,6 +19,9 @@
                 <button class="button">
                     <div id="calendrier1" class="calendrier"></div>
                 </button>
+
+                <button id="send-message">Envoyer un message</button>
+                <p id="output">Aucune donnée reçue.</p>
 
                 <button class="button">
                     <div id="calendrier2" class="calendrier"></div>
@@ -38,7 +42,8 @@
             </div>
             <div class="content_liste">
                 <div id="content-list" class="content-list">
-                    test1
+                    <div id="title">title</div>
+                    <div id="time">time</div>
                 </div>
 
                 <div id="content-list" class="content-list">
