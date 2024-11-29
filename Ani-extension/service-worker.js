@@ -10,3 +10,33 @@ importScripts('service-worker-utils.js')
 // If you want to import a file that is deeper in the file hierarchy of your
 // extension, simply do `importScripts('path/to/file.js')`.
 // The path should be relative to the file `manifest.json`.
+
+
+
+let popupPort = null;
+
+
+console.log("Service worker");
+// Écouter les connexions depuis le popup
+chrome.runtime.onConnect.addListener((port) => {
+    console.log("port : ", port.name);
+    if (port.name === "popup") {
+        popupPort = port;
+        console.log("port : ", port, "popupPort : ", popupPort);
+        console.log("connect? : ", port.onDisconnect);
+        // Nettoyer la référence si le popup est fermé
+        port.onDisconnect.addListener(() => {
+            popupPort = null;
+        });
+    }
+});
+
+// Relayer les messages depuis foreground.js vers le popup
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log(message.type, popupPort);
+    if (message.type === "update" && popupPort) {
+        console.log("j'envoi bientot le message");
+        popupPort.postMessage({ action: "update", data: message.data });
+    }
+    sendResponse({ status: "Message relayé" });
+});

@@ -23,7 +23,7 @@
     "content_scripts": [{
         "run_at": "document_idle",
         "js": ["foreground.js"],
-        "matches": ["https://v5.voiranime.com/*","https://*.crunchyroll.com/*"],
+        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*"],
         "type": "module",
         "all_frames": true
     }]
