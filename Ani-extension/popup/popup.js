@@ -12,6 +12,7 @@ const port = chrome.runtime.connect({ name: "popup" });
 
 // 2. Écouter les messages du service worker
 port.onMessage.addListener((message) => {
+    alert("test");
     console.log("Message reçu depuis le service worker :", message);
 
     // Vérifier le type d'action et mettre à jour l'affichage si nécessaire

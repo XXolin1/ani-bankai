@@ -53,13 +53,13 @@ function voiranime(animeClass) {
 
   if (location.hostname == 'v5.voiranime.com') {
 
-  let link = location.href;
-  let title = link.split("/")[4].split("-").join(" ");
-  let episodeLink = link.split("/")[5];
-  let episode = episodeLink.split("-")[4];
-  let traduction = episodeLink.split("-")[5];
+    let link = location.href;
+    let title = link.split("/")[4].split("-").join(" ");
+    let episodeLink = link.split("/")[5];
+    let episode = episodeLink.split("-")[4];
+    let traduction = episodeLink.split("-")[5];
 
-  console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
+    console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
   }
 
 
@@ -83,6 +83,23 @@ function voiranime(animeClass) {
     });
   }
 
+  console.log("ON PASSE AU SEND MESSAGE");
+
+  // Envoyer un message au service worker
+  chrome.runtime.sendMessage(
+    { type: "update", data: "Message depuis foreground.js" },
+    console.log("Message envoyé au service worker"),
+    (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+
+      } else {
+        console.log("Réponse reçue du service worker :", response);
+
+      }
+    }
+  );
+
 
 
 }
@@ -95,21 +112,10 @@ function crunchyroll(animeCLass) {
 
 
 function displayAnimeCarac() {
-  let 
+  let
 }
 
 
-// Envoyer un message au service worker
-chrome.runtime.sendMessage(
-  { type: "updatePopup", data: "Message depuis foreground.js" },
-  (response) => {
-      if (chrome.runtime.lastError) {
-          console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-      } else {
-          console.log("Réponse reçue du service worker :", response);
-      }
-  }
-);
 
 
 
