@@ -1,3 +1,4 @@
+
 let title = document.getElementById('title');
 let time = document.getElementById('time');
 
@@ -28,5 +29,18 @@ port.onMessage.addListener((message) => {
 
 
 
+// notification status 
 
+const notifications = document.querySelectorAll('.notif');
 
+// Ajoutez un événement à chaque bouton
+notifications.forEach(notification => {
+    notification.addEventListener('click', function () {
+        // Vérifiez et changez le style uniquement pour le bouton cliqué
+        if (this.style.backgroundImage.includes("bouton-notifications-colored.png")) {
+            this.style.backgroundImage = "url('/images-extension/bouton-notifications.png')";
+        } else {
+            this.style.backgroundImage = "url('/images-extension/bouton-notifications-colored.png')";
+        }
+    });
+});
