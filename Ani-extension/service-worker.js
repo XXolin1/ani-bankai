@@ -11,32 +11,56 @@ importScripts('service-worker-utils.js')
 // extension, simply do `importScripts('path/to/file.js')`.
 // The path should be relative to the file `manifest.json`.
 
+// ID : hiabjpjjljjfjjeinealgdmodpljpifm
 
 
 let popupPort = null;
 
+// ---------------------- ca c'est ok !! ----------------------
 
 console.log("Service worker");
-// Écouter les connexions depuis le popup
+
+
 chrome.runtime.onConnect.addListener((port) => {
-    console.log("port : ", port.name);
+    console.log("[Service Worker] Connexion reçue depuis:", port.name);
+
     if (port.name === "popup") {
         popupPort = port;
-        console.log("port : ", port, "popupPort : ", popupPort);
-        console.log("connect? : ", port.onDisconnect);
-        // Nettoyer la référence si le popup est fermé
+        console.log("[Service Worker] popupPort initialisé:", popupPort);
+
+        // Gérer la déconnexion
         port.onDisconnect.addListener(() => {
+            console.log("[Service Worker] Popup déconnecté");
             popupPort = null;
         });
+    } else {
+        console.warn("[Service Worker] Connexion inconnue ignorée:", port.name);
     }
 });
 
-// Relayer les messages depuis foreground.js vers le popup
+// ---------------------- ------------- ----------------------
+
+console.log("j'ai fini la recup du port et tt");
+
+// Écoute les messages et envoie
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log(message.type, popupPort);
+    console.log("[Service Worker] Message reçu:", message);
+
     if (message.type === "update" && popupPort) {
-        console.log("j'envoi bientot le message");
+        console.log("[Service Worker] Envoi du message au popup via popupPort");
         popupPort.postMessage({ action: "update", data: message.data });
+    } else {
+        console.warn("[Service Worker] Message ignoré (popupPort non initialisé ou type incorrect)");
     }
-    sendResponse({ status: "Message relayé" });
+
+    sendResponse({ status: "Message reçu et traité" });
 });
+
+
+
+
+//// Écoute les messages de la popup
+//port.onMessage.addListener((msg) => {
+//    console.log("[Service Worker] Message reçu de la popup:", msg);
+//    // recevoir check si la popup a bien recu le message
+//});

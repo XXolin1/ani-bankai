@@ -1,32 +1,43 @@
 let title = document.getElementById('title');
 let time = document.getElementById('time');
 
-title.textContent = 'New Title AAA';
 
 console.log("Popup.js");
+
+chrome.runtime.onMessageExternal.addListener(
+    function(request, sender, sendResponse) {
+        console.log("Popup.js : Message reçu : ", request);
+        let test = getElementById('output');
+        test.textContent = request;
+    });
 
 // TEST AVEC CHAT GPT
 
 // 1. Établir une connexion avec le service worker
 const port = chrome.runtime.connect({ name: "popup" });
+console.log("[Popup] Connexion au service worker établie");
 
 // 2. Écouter les messages du service worker
 port.onMessage.addListener((message) => {
-    alert("test");
-    console.log("Message reçu depuis le service worker :", message);
-
-    // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
-    if (message.action === "update") {
-        // Exemple : mise à jour d'un élément HTML dans la popup
-        const outputElement = document.getElementById("output");
-        if (outputElement) {
-            outputElement.textContent = message.data;
-            alert("j suis la !!!")
-        }
-    }
+    console.log("[Popup] Message reçu depuis le service worker:", message);
 });
 
+port.postMessage({ action: "popupReady" });
 
 
+//// 2. Écouter les messages du service worker
+//port.onMessage.addListener((message) => {
+//    console.log("[Popup] Message reçu depuis le service worker:", message);
+//
+//    // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
+//    if (message.action === "update") {
+//        // Exemple : mise à jour d'un élément HTML dans la popup
+//        const outputElement = document.getElementById("output");
+//        if (outputElement) {
+//            outputElement.textContent = message.data;
+//            alert("j suis la !!!")
+//        }
+//    }
+//});
 
 

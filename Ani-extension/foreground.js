@@ -17,18 +17,6 @@ class anime {
 }
 
 let animeCarac = new anime();
-
-
-function voiranime(animeClass) {
-  var player = document.querySelector('iframe[src*="streaming.php"]');
-  if (player) {
-    var src = player.src;
-    var id = src.match(/id=(\d+)/)[1];
-    var url = 'https://voiranime.com/streaming.php?id=' + id;
-    player.src = url;
-  }
-  animeClass.title = document.querySelector('h1').textContent;
-}
 //
 
 function crunchyroll(animeClass,host,callback) {
@@ -76,8 +64,11 @@ function crunchyroll(animeClass,host,callback) {
 
 console.log("URL : ", location.hostname, location.href);
 
+//var views = chrome.extension.getViews({ type: "popup" }); juste comme ca
+
 switch (location.hostname) {
 
+  case 'v5.voiranime.com':
   case 'vidmoly.to':
     console.log("URL case iframe : ", location.hostname, location.href);
     voiranime(animeCarac);
@@ -124,6 +115,8 @@ function voiranime(animeClass) {
   video = document.querySelector('video');
   console.log("URL case iframe : ", location.hostname, location.href);
 
+  console.log("ca skip ici c chiants");
+
   if (video != null) {
     console.log("Video : ", video);
     video.addEventListener('play', () => {
@@ -140,25 +133,35 @@ function voiranime(animeClass) {
 
   console.log("ON PASSE AU SEND MESSAGE");
 
-  // Envoyer un message au service worker
-  chrome.runtime.sendMessage(
-    { type: "update", data: "Message depuis foreground.js" },
-    console.log("Message envoyé au service worker"),
-    (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+  // The ID of the extension we want to talk to.
+var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
 
-      } else {
-        console.log("Réponse reçue du service worker :", response);
+// Make a simple request:
 
-      }
+chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: "Message depuis foreground.js" },
+  function(response) {
+    if (chrome.runtime.lastError) {
+      console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+    } else {
+      console.log("[foreground] Réponse reçue du service worker :", response);
     }
-  );
+  });
 
-
-
+  //// Envoyer un message au service worker
+  //chrome.runtime.sendMessage(
+  //  { type: "update", data: "Message depuis foreground.js" },
+  //  console.log("Message envoyé au service worker"),
+  //  (response) => {
+  //    if (chrome.runtime.lastError) {
+  //      console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+//
+  //    } else {
+  //      console.log("[foreground] Réponse reçue du service worker :", response);
+//
+  //    }
+  //  }
+  //);
 }
-
 
 
 function crunchyroll(animeCLass) {

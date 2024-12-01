@@ -13,7 +13,11 @@
         "default_title": "Ani-extension",
         "default_popup": "popup/popup.html"
     },
-    "permissions": [],
+    "permissions": [
+
+    "tabs",
+    "activeTab"
+],
     "host_permissions": [
         "*://*/*"
     ],
@@ -23,8 +27,11 @@
     "content_scripts": [{
         "run_at": "document_idle",
         "js": ["foreground.js"],
-        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*"],
+        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*", "*://*.u6lyxl0w.xyz/*"],
         "type": "module",
         "all_frames": true
-    }]
+    }],
+    "externally_connectable": {
+        "matches": ["*://*/*"]
+    }
 }
