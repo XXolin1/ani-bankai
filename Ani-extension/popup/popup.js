@@ -5,22 +5,41 @@ let time = document.getElementById('time');
 
 console.log("Popup.js");
 
+/*
 chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse) {
         console.log("Popup.js : Message reçu : ", request);
         let test = getElementById('output');
         test.textContent = request;
     });
+*/
 
-// TEST AVEC CHAT GPT
+    
+// -----------------------------------------------------------
 
 // 1. Établir une connexion avec le service worker
 const port = chrome.runtime.connect({ name: "popup" });
-console.log("[Popup] Connexion au service worker établie");
+console.log("[Popup] Connexion au service worker établie sur le port :", port);
+
+// -----------------------------------------------------------
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.visibilityState === "visible") {
+        // Envoyer un message au service worker pour indiquer que la popup est prête
+        port.postMessage({ action: "popupReady" });
+        console.log("[Popup] Message envoyé au service worker");
+    }
+});
+
+
+
+
+// -----------------------------------------------------------
 
 // 2. Écouter les messages du service worker
 port.onMessage.addListener((message) => {
-    alert("test");
+    //alert("test");
     console.log("Message reçu depuis le service worker :", message);
 
     // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
@@ -29,12 +48,13 @@ port.onMessage.addListener((message) => {
         const outputElement = document.getElementById("output");
         if (outputElement) {
             outputElement.textContent = message.data;
-            alert("j suis la !!!")
+            //alert("j suis la !!!")
         }
     }
 });
 
-port.postMessage({ action: "popupReady" });
+
+// -----------------------------------------------------------
 
 
 // notification status 

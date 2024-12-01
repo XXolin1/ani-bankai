@@ -15,6 +15,7 @@ importScripts('service-worker-utils.js')
 
 
 let popupPort = null;
+let isPopupConnected = false;
 
 // ---------------------- ca c'est ok !! ----------------------
 
@@ -25,11 +26,23 @@ chrome.runtime.onConnect.addListener((port) => {
     console.log("[Service Worker] Connexion reçue depuis:", port.name);
 
     if (port.name === "popup") {
+        isPopupConnected = true;   
         popupPort = port;
         console.log("[Service Worker] popupPort initialisé:", popupPort);
 
+        port.onMessage.addListener((message) => {
+            console.log("[Service Worker] Message reçu depuis la popup :", message);
+
+            if (message.action === "popupReady") {
+                console.log("[Service Worker] La popup est prête.");
+                // Répondre ou traiter le message
+                port.postMessage({ status: "ok", message: "Message reçu par le service worker" });
+            }
+        });
+
         // Gérer la déconnexion
         port.onDisconnect.addListener(() => {
+            isPopupConnected = false;
             console.log("[Service Worker] Popup déconnecté");
             popupPort = null;
         });
@@ -45,11 +58,18 @@ console.log("j'ai fini la recup du port et tt");
 // Écoute les messages et envoie
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("[Service Worker] Message reçu:", message);
+    console.log("port actuel : ", popupPort);
 
-    if (message.type === "update" && popupPort) {
+    if (message.type === "checkPopupConnection") {
+        sendResponse({ isPopupConnected });
+    }
+
+    else if (message.type === "update" && popupPort && isPopupConnected) {
         console.log("[Service Worker] Envoi du message au popup via popupPort");
         popupPort.postMessage({ action: "update", data: message.data });
-    } else {
+    } 
+    
+    else {
         console.warn("[Service Worker] Message ignoré (popupPort non initialisé ou type incorrect)");
     }
 

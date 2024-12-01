@@ -9,26 +9,26 @@
 
 class anime {
   constructor() {
-      this.name = "";
-      this.title = "";
-      this.episode = "";
-      this.link = "";
+    this.name = "";
+    this.title = "";
+    this.episode = "";
+    this.link = "";
   }
 }
 
 let animeCarac = new anime();
 //
 
-function crunchyroll(animeClass,host,callback) {
+function crunchyroll(animeClass, host, callback) {
   // Find the title of the anime
   if (host == 'www.crunchyroll.com') {
     // Trouver le conteneur à observer
-    let targetNode = document.getElementById('content'); 
+    let targetNode = document.getElementById('content');
     // Configuration de l'observateur
     let config = { childList: true, subtree: true };
 
     // Callback pour gérer les mutations
-    let observerCallback = function(mutationsList, observer) {
+    let observerCallback = function (mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type === 'childList') {
           let titleNode = document.querySelector('h1');
@@ -51,7 +51,7 @@ function crunchyroll(animeClass,host,callback) {
   else if (host == 'static.crunchyroll.com') {
     let video = document.querySelector('video');
     video.addEventListener('timeupdate', () => {
-      console.log(Math.floor(video.currentTime) );
+      console.log(Math.floor(video.currentTime));
     });
   }
   else {
@@ -76,7 +76,7 @@ switch (location.hostname) {
 
   case 'www.crunchyroll.com':
   case 'static.crunchyroll.com':
-    crunchyroll(anime,location.hostname, () => {
+    crunchyroll(anime, location.hostname, () => {
       // callback funct to save data
     });
 
@@ -131,37 +131,62 @@ function voiranime(animeClass) {
     });
   }
 
-  console.log("ON PASSE AU SEND MESSAGE");
+  //setInterval(() => {
+  sendMessageToPopup("le premier message dans un cas normal a peu pres MDRRRR AHAHAHA (PTN si zen voit ca...)");
+  //}, 1000);
+  
+}
 
   // The ID of the extension we want to talk to.
-var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
+  var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
 
-// Make a simple request:
-
-chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: "Message depuis foreground.js" },
-  function(response) {
-    if (chrome.runtime.lastError) {
-      console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-    } else {
-      console.log("[foreground] Réponse reçue du service worker :", response);
-    }
+// Fonction pour vérifier la connexion de la popup
+function checkPopupConnexion() {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage(editorExtensionId, { type: "checkPopupConnection" }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("[Foreground] Erreur :", chrome.runtime.lastError.message);
+        resolve(false);
+      } else {
+        console.log("Connexion de la popup : ", response);
+        resolve(response.isPopupConnected);
+      }
+    });
   });
-
-  //// Envoyer un message au service worker
-  //chrome.runtime.sendMessage(
-  //  { type: "update", data: "Message depuis foreground.js" },
-  //  console.log("Message envoyé au service worker"),
-  //  (response) => {
-  //    if (chrome.runtime.lastError) {
-  //      console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-//
-  //    } else {
-  //      console.log("[foreground] Réponse reçue du service worker :", response);
-//
-  //    }
-  //  }
-  //);
 }
+
+// Fonction pour envoyer un message à la popup une fois qu'elle est connectée
+async function sendMessageToPopup(message) {
+  // Fonction pour attendre que la popup soit connectée
+  async function waitForPopupConnection() {
+    return new Promise((resolve) => {
+      const interval = setInterval(async () => {
+        const isPopupConnected = await checkPopupConnexion();
+        if (isPopupConnected) {
+          clearInterval(interval); // Arrêter l'interval une fois que la popup est connectée
+          resolve(true); // La popup est connectée
+        }
+      }, 1000); // Vérifier toutes les secondes
+    });
+  }
+
+  // Attendre que la popup soit connectée
+  const popupConnected = await waitForPopupConnection();
+
+  if (popupConnected) {
+    // Envoie du message à la popup une fois qu'elle est connectée
+    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: "Message depuis foreground.js toute les secondes" }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+      } else {
+        console.log("[Foreground] Réponse reçue du service worker :", response);
+      }
+    });
+  } else {
+    console.log("Popup non connectée");
+  }
+}
+
 
 
 function crunchyroll(animeCLass) {
