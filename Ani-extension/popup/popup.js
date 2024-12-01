@@ -37,7 +37,6 @@ port.onMessage.addListener((message) => {
 port.postMessage({ action: "popupReady" });
 
 
-
 // notification status 
 
 const notifications = document.querySelectorAll('.notif');
@@ -53,10 +52,7 @@ notifications.forEach(notification => {
         }
     });
 });
-    console.log("[Popup] Message reçu depuis le service worker:", message);
-});
 
-port.postMessage({ action: "popupReady" });
 
 
 //// 2. Écouter les messages du service worker
