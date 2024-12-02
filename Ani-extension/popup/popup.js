@@ -45,9 +45,18 @@ port.onMessage.addListener((message) => {
     // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
     if (message.action === "update") {
         // Exemple : mise à jour d'un élément HTML dans la popup
-        const outputElement = document.getElementById("output");
-        if (outputElement) {
-            outputElement.textContent = message.data;
+        const title = document.getElementById("anime-title")
+
+        if (title) {
+            title.textContent = message.data;
+        }
+    }
+    
+    if (message.action === "timecode") {
+        const timecode = document.getElementById("timecode")
+
+        if (timecode) {   
+            timecode.textContent = message.data;
             //alert("j suis la !!!")
         }
     }

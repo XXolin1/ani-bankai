@@ -70,6 +70,7 @@ switch (location.hostname) {
 
   case 'v5.voiranime.com':
   case 'vidmoly.to':
+  case 'u6lyxl0w.xyz':
     console.log("URL case iframe : ", location.hostname, location.href);
     voiranime(animeCarac);
     break;
@@ -105,6 +106,8 @@ function voiranime(animeClass) {
     let episode = episodeLink.split("-")[4];
     let traduction = episodeLink.split("-")[5];
 
+    animeCarac.title = title;
+
     console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
   }
 
@@ -128,17 +131,44 @@ function voiranime(animeClass) {
 
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));
+
+      // test
+      chrome.runtime.sendMessage(editorExtensionId, { type: "timecode", data: Math.floor(video.currentTime) }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+        } else {
+          console.log("[Foreground] Réponse reçue du service worker :", response);
+        }
+      });
+      // test
     });
   }
 
   //setInterval(() => {
-  sendMessageToPopup("le premier message dans un cas normal a peu pres MDRRRR AHAHAHA (PTN si zen voit ca...)");
-  //}, 1000);
-  
+  //sendMessageToPopup("le premier message dans un cas normal a peu pres MDRRRR AHAHAHA (PTN si zen voit ca...)");
+  //}, 100);
+
+  // --------------------- ok ---------------------
+
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if(animeCarac.title == "") return;
+    console.log("Message reçu :", message);
+    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: animeCarac.title }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+      } else {
+        console.log("[Foreground] Réponse reçue du service worker :", response);
+      }
+    });
+  })
+
+  // --------------------- -- ---------------------
+
 }
 
-  // The ID of the extension we want to talk to.
-  var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
+
+// The ID of the extension we want to talk to.
+var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
 
 // Fonction pour vérifier la connexion de la popup
 function checkPopupConnexion() {
@@ -175,7 +205,7 @@ async function sendMessageToPopup(message) {
 
   if (popupConnected) {
     // Envoie du message à la popup une fois qu'elle est connectée
-    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: "Message depuis foreground.js toute les secondes" }, (response) => {
+    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: message }, (response) => {
       if (chrome.runtime.lastError) {
         console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
       } else {
