@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(180deg, #FFED68 0%, #38D4F8 100%);
+    background: linear-gradient(to bottom right, #FFED68 0%, #38D4F8 100%);
     display: flex;
     color: #000000;
     width: 28rem;
@@ -9,19 +9,23 @@ body {
 
 .profile-picture {
     position: relative;
+    margin-top: 25px;
+    margin-left: 25px;
+    scale: 1.6; 
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
 .calendrier {
-    display: flex;
     background-image: url('/images-extension/calendrier.png');
     background-size: cover;
     width: 30px;
     height: 30px;
-    justify-content: center;
+    border: none;
+    padding: 5px;
 }
+
 
 .goto-btn{
     background-image: url('/images-extension/envoyer.png');
@@ -70,21 +74,15 @@ progress::-webkit-progress-value {
     justify-content: center;
 }
 
-.button {
-    background-color: #FFF8EA;
-    border-radius: 10px;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    margin-top: 20%;
-    margin-bottom: 20%;
-    justify-content: center;
-    align-items: center;
+button{
     border: none;
+    border-radius: 10px;
+    width: 52px;
+    height: 52px;
+    background-color: transparent;
 }
-
 button:hover {
-    background-color: #ede4d3;
+    background-color: #b0a8a0;
 }
 .top-bar{
     display: flex;
@@ -109,7 +107,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 85%;
     margin-top: 40px;
 }
 .content_liste{
@@ -128,7 +126,7 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.50);
     border-radius: 27px;
     flex-shrink: 0;
-    width: 87%;
+    width: 344px;
     margin-right: 15px;
     margin-bottom: 10px;
 }
@@ -157,31 +155,37 @@ button:hover {
 .combo-box-select {
     border: none;
     background-color: transparent;
-    
-}
-.combo-box-select:focus {
-    outline: none;
-}
-
-.option {
     font-family: Arial, Helvetica, sans-serif; 
     font-size: 14px; 
     font-weight: 700; 
     margin-left: 55px;
     margin-right: 90px;
     scrollbar-color: #D9D9D9 #FFF8EA;
+    
 }
-
+.combo-box-select:focus {
+    outline: none;
+}
+.combo-box-select option {
+}
 .global {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-
+.left-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .button-part{
     display: flex;
     flex-direction: column;
+    align-items: start;
+    height: 453px;
+    width: 100%;
 }
 
 #send-message{
@@ -192,10 +196,14 @@ button:hover {
 }
 
 .column-button {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
+    background-color: rgba(0, 0, 0, 0.50);
+    border-radius: 20px;
+    padding-right: 6px;
+    padding-left: 6px;
+    height: 50%;
 }
 
 ::-webkit-scrollbar {
@@ -203,11 +211,12 @@ button:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: #FFF8EA;
+    background: #fff8ea9d;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #b0a8a0;
+    background-color: rgba(0, 0, 0, 0.50);
     border-radius: 5px;
 }
 
