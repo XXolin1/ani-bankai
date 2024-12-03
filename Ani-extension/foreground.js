@@ -7,6 +7,9 @@
 //console.log('Foreground script running');
 //console.log(location.href);
 
+// The ID of the extension we want to talk to.
+var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
+
 class anime {
   constructor() {
     this.name = "";
@@ -17,7 +20,42 @@ class anime {
 }
 
 let animeCarac = new anime();
-//
+
+console.log("URL : ", location.hostname, location.href);
+
+//var views = chrome.extension.getViews({ type: "popup" }); juste comme ca
+
+switch (location.hostname) {
+
+  case 'v5.voiranime.com':
+  case 'vidmoly.to':
+  case 'u6lyxl0w.xyz':
+  case 'voe.sx':
+  case 'sandratableother.com':
+    console.log("URL case iframe : ", location.hostname, location.href);
+    voiranime(animeCarac);
+    break;
+
+  case 'www.crunchyroll.com':
+  case 'static.crunchyroll.com':
+    crunchyroll(anime, location.hostname, () => {
+      // callback funct to save data
+    });
+
+    break;
+
+  default:
+    break;
+}
+
+
+function getAnimeCarac() {
+  console.log("getAnimeCarac");
+
+  let link = location.href;
+}
+
+
 
 function crunchyroll(animeClass, host, callback) {
   // Find the title of the anime
@@ -62,38 +100,6 @@ function crunchyroll(animeClass, host, callback) {
 
 
 
-console.log("URL : ", location.hostname, location.href);
-
-//var views = chrome.extension.getViews({ type: "popup" }); juste comme ca
-
-switch (location.hostname) {
-
-  case 'v5.voiranime.com':
-  case 'vidmoly.to':
-    console.log("URL case iframe : ", location.hostname, location.href);
-    voiranime(animeCarac);
-    break;
-
-  case 'www.crunchyroll.com':
-  case 'static.crunchyroll.com':
-    crunchyroll(anime, location.hostname, () => {
-      // callback funct to save data
-    });
-
-    break;
-
-  default:
-    break;
-}
-
-function getAnimeCarac() {
-  console.log("getAnimeCarac");
-
-  let link = location.href;
-}
-
-
-
 
 function voiranime(animeClass) {
 
@@ -104,6 +110,8 @@ function voiranime(animeClass) {
     let episodeLink = link.split("/")[5];
     let episode = episodeLink.split("-")[4];
     let traduction = episodeLink.split("-")[5];
+
+    animeCarac.title = title;
 
     console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
   }
@@ -128,93 +136,31 @@ function voiranime(animeClass) {
 
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));
-    });
-  }
 
-  //setInterval(() => {
-  sendMessageToPopup("le premier message dans un cas normal a peu pres MDRRRR AHAHAHA (PTN si zen voit ca...)");
-  //}, 1000);
-  
-}
-
-  // The ID of the extension we want to talk to.
-  var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
-
-// Fonction pour vérifier la connexion de la popup
-function checkPopupConnexion() {
-  return new Promise((resolve) => {
-    chrome.runtime.sendMessage(editorExtensionId, { type: "checkPopupConnection" }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("[Foreground] Erreur :", chrome.runtime.lastError.message);
-        resolve(false);
-      } else {
-        console.log("Connexion de la popup : ", response);
-        resolve(response.isPopupConnected);
-      }
-    });
-  });
-}
-
-// Fonction pour envoyer un message à la popup une fois qu'elle est connectée
-async function sendMessageToPopup(message) {
-  // Fonction pour attendre que la popup soit connectée
-  async function waitForPopupConnection() {
-    return new Promise((resolve) => {
-      const interval = setInterval(async () => {
-        const isPopupConnected = await checkPopupConnexion();
-        if (isPopupConnected) {
-          clearInterval(interval); // Arrêter l'interval une fois que la popup est connectée
-          resolve(true); // La popup est connectée
+      chrome.runtime.sendMessage(editorExtensionId, { type: "timecode", data: Math.floor(video.currentTime) }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+        } else {
+          console.log("[Foreground] Réponse reçue du service worker :", response);
         }
-      }, 1000); // Vérifier toutes les secondes
+      });
     });
   }
 
-  // Attendre que la popup soit connectée
-  const popupConnected = await waitForPopupConnection();
 
-  if (popupConnected) {
-    // Envoie du message à la popup une fois qu'elle est connectée
-    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: "Message depuis foreground.js toute les secondes" }, (response) => {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if(animeCarac.title == "") return;
+    console.log("Message reçu :", message);
+    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: animeCarac.title }, (response) => {
       if (chrome.runtime.lastError) {
         console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
       } else {
         console.log("[Foreground] Réponse reçue du service worker :", response);
       }
     });
-  } else {
-    console.log("Popup non connectée");
-  }
+  })
 }
-
-
-
-function crunchyroll(animeCLass) {
-  console.log("Crunchyroll");
-}
-
 
 function displayAnimeCarac() {
   let
 }
-
-
-
-
-
-
-
-
-//let video = document.querySelector('video');
-//
-////console.log(video);
-//
-//video.addEventListener('play', () => {
-//
-//});
-//// video.duration;
-//// video.currentTime;
-//
-//video.addEventListener('timeupdate', () => {
-//  console.log(Math.floor(video.currentTime) );
-//});

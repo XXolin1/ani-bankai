@@ -25,8 +25,7 @@ console.log("Service worker");
 chrome.runtime.onConnect.addListener((port) => {
     console.log("[Service Worker] Connexion reçue depuis:", port.name);
 
-    if (port.name === "popup") {
-        isPopupConnected = true;   
+    if (port.name === "popup") {  
         popupPort = port;
         console.log("[Service Worker] popupPort initialisé:", popupPort);
 
@@ -35,7 +34,11 @@ chrome.runtime.onConnect.addListener((port) => {
 
             if (message.action === "popupReady") {
                 console.log("[Service Worker] La popup est prête.");
+                chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+                    chrome.tabs.sendMessage(tabs[0].id, { status: "ok", message: "Popup prête" }, function(response) {});  
+                });
                 // Répondre ou traiter le message
+                isPopupConnected = true; 
                 port.postMessage({ status: "ok", message: "Message reçu par le service worker" });
             }
         });
@@ -57,16 +60,16 @@ console.log("j'ai fini la recup du port et tt");
 
 // Écoute les messages et envoie
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("[Service Worker] Message reçu:", message);
-    console.log("port actuel : ", popupPort);
+    console.log("[Service Worker] Message reçu:", message.data);
+    //console.log("port actuel : ", popupPort);
 
     if (message.type === "checkPopupConnection") {
         sendResponse({ isPopupConnected });
     }
 
-    else if (message.type === "update" && popupPort && isPopupConnected) {
+    else if (["update", "timecode"].includes(message.type) && popupPort) {
         console.log("[Service Worker] Envoi du message au popup via popupPort");
-        popupPort.postMessage({ action: "update", data: message.data });
+        popupPort.postMessage({ action: message.type, data: message.data });
     } 
     
     else {
