@@ -168,6 +168,11 @@ button:hover {
 }
 .combo-box-select option {
 }
+.combox-back{
+    position: absolute;
+    top: 5%;
+    left: 90%;
+}
 .global {
     height: 100%;
     width: 100%;

@@ -74,20 +74,50 @@ notifications.forEach(notification => {
 });
 
 
+// theme
+let theme = document.getElementById('combox-back');
+console.log(theme);
 
-//// 2. Écouter les messages du service worker
-//port.onMessage.addListener((message) => {
-//    console.log("[Popup] Message reçu depuis le service worker:", message);
-//
-//    // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
-//    if (message.action === "update") {
-//        // Exemple : mise à jour d'un élément HTML dans la popup
-//        const outputElement = document.getElementById("output");
-//        if (outputElement) {
-//            outputElement.textContent = message.data;
-//            alert("j suis la !!!")
-//        }
-//    }
-//});
+theme.addEventListener("change", () =>{
+    console.log(theme.value);
+    switch (theme.value) {
+        
+        case "1":
+            document.body.style.background = "linear-gradient(to bottom right, #FFED68 0%, #38D4F8 100%)";
+            break;
+        case "2":
+            document.body.style.background = "linear-gradient(to bottom right, #FF93F8 0%, #52BDFF 100%)";
+            break;
+        case "3":
+            document.body.style.background = "linear-gradient(to bottom right, #FF4A4A 0%, #0CFE71 100%)";
+            break;
+        case "4":
+            document.body.style.background = "linear-gradient(to bottom right, #36E43C 0%, #E2FF3E 100%)";
+            break;
+        case "5":
+            document.body.style.background = "linear-gradient(to bottom right, #294DFF 0%, #FE951E 100%)";
+            break;
+        default:
+            document.body.style.background = "linear-gradient(to bottom right, #FFED68 0%, #38D4F8 100%)";
+    }
 
 
+});
+
+
+
+// second to m:s
+function secondsToms(d) {
+    d = Number(d);
+    let m = Math.floor(d % 3600 / 60);
+    let s = Math.floor(d % 3600 % 60);
+    return m +":"+s;
+}
+
+// update time
+function updateTime(t,tempsEp) {
+    let prog = t/tempsEp*100;
+    let bar = document.getElementById('bar');
+    bar.value = prog;
+    bar.textContent = `${prog}%`;
+}
