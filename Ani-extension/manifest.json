@@ -26,7 +26,7 @@
     "content_scripts": [{
         "run_at": "document_idle",
         "js": ["foreground.js"],
-        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*", "*://*.u6lyxl0w.xyz/*", "*://*.voe.sx/", "https://sandratableother.com/*"],
+        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*", "*://*.6v254h9v.xyz/*", "*://*.voe.sx/", "https://sandratableother.com/*", "https://my.mail.ru/*"],
         "type": "module",
         "all_frames": true
     }],

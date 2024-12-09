@@ -29,9 +29,10 @@ switch (location.hostname) {
 
   case 'v5.voiranime.com':
   case 'vidmoly.to':
-  case 'u6lyxl0w.xyz':
+  case '6v254h9v.xyz':
   case 'voe.sx':
   case 'sandratableother.com':
+  case 'my.mail.ru':
     console.log("URL case iframe : ", location.hostname, location.href);
     voiranime(animeCarac);
     break;
@@ -127,12 +128,6 @@ function voiranime(animeClass) {
 
   if (video != null) {
     console.log("Video : ", video);
-    video.addEventListener('play', () => {
-
-    });
-
-    // video.duration;
-    // video.currentTime;
 
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));

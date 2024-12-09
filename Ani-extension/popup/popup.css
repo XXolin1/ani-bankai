@@ -81,14 +81,18 @@ button{
     height: 52px;
     background-color: transparent;
 }
+
 button:hover {
     background-color: #b0a8a0;
 }
+
 .top-bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
+
 .top-bar .notif{
     height: 20px;
     background-image: url('/images-extension/bouton-notifications.png');
@@ -136,6 +140,10 @@ button:hover {
     margin-left: 30px;
     color: #ffffff;
     font-size: 20px;
+    max-width: 79%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .content-list h3 {
     margin: 0;
@@ -229,6 +237,11 @@ button:hover {
     background-color: #8f8075;
 }
 
+.content-list:hover h1{
+    transform: translateX(-320px);
+    transition: 8s;
+}
 
-
-
+.content-list:hover h1{
+    overflow: visible;
+}
