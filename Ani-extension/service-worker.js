@@ -70,8 +70,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     else if (["update", "timecode"].includes(message.type) && popupPort) {
         console.log("[Service Worker] Envoi du message au popup via popupPort");
         popupPort.postMessage({ action: message.type, data: message.data });
+    }
+    else if (["video"].includes(message.type) && popupPort) {
+        console.log("[Service Worker] Envoi du message au popup via popupPort");
+        popupPort.postMessage({ action: message.type, data: message.data });
     } 
-    
     else {
         console.warn("[Service Worker] Message ignoré (popupPort non initialisé ou type incorrect)");
     }

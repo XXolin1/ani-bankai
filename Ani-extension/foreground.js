@@ -8,7 +8,7 @@
 //console.log(location.href);
 
 // The ID of the extension we want to talk to.
-var editorExtensionId = "hiabjpjjljjfjjeinealgdmodpljpifm";
+var editorExtensionId = "kfehckjhfdgkapccpglbdfjgbhlfnflk";
 
 class anime {
   constructor() {
@@ -128,6 +128,19 @@ function voiranime(animeClass) {
 
   if (video != null) {
     console.log("Video : ", video);
+    video.addEventListener('play', () => {
+
+    });
+
+    chrome.runtime.sendMessage(editorExtensionId, { type: "video", data:""}, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+      } else {
+        console.log("[Foreground] Réponse reçue du service worker :", response);
+      }
+    });
+    // video.duration;
+    // video.currentTime;
 
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));
@@ -154,8 +167,4 @@ function voiranime(animeClass) {
       }
     });
   })
-}
-
-function displayAnimeCarac() {
-  let
 }

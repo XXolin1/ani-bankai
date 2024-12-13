@@ -2,6 +2,30 @@
 let title = document.getElementById('title');
 let time = document.getElementById('time');
 
+// second to m:s
+function secondsToms(d) {
+    d = Number(d);
+    let m = Math.floor(d % 3600 / 60);
+    let s = Math.floor(d % 3600 % 60);
+    return m +":"+s;
+}
+
+// update time
+function updateTime(t,tempsEp) {
+    let prog = t/tempsEp*100;
+    let bar = document.getElementById('bar');
+    bar.value = prog;
+    bar.textContent = `${prog}%`;
+}
+
+function VideoMode(){
+    // display none everything
+    let base = document.getElementById('base');
+    console.log(base);
+    base.style.display = "none";
+    let vidmod = document.getElementById('VidMod');
+    vidmod.style.display = "block";
+}
 
 console.log("Popup.js");
 
@@ -20,7 +44,7 @@ chrome.runtime.onMessageExternal.addListener(
 // 1. Établir une connexion avec le service worker
 const port = chrome.runtime.connect({ name: "popup" });
 console.log("[Popup] Connexion au service worker établie sur le port :", port);
-
+port.postMessage({ action: "popupReady" });
 // -----------------------------------------------------------
 
 
@@ -52,13 +76,18 @@ port.onMessage.addListener((message) => {
         }
     }
     
-    if (message.action === "timecode") {
+    else if (message.action === "timecode") {
+        
         const timecode = document.getElementById("timecode")
 
         if (timecode) {   
             timecode.textContent = message.data;
             //alert("j suis la !!!")
         }
+        
+    }
+    else if (message.action === "video") {
+        VideoMode();
     }
 });
 
@@ -115,18 +144,4 @@ theme.addEventListener("change", () =>{
 
 
 
-// second to m:s
-function secondsToms(d) {
-    d = Number(d);
-    let m = Math.floor(d % 3600 / 60);
-    let s = Math.floor(d % 3600 % 60);
-    return m +":"+s;
-}
 
-// update time
-function updateTime(t,tempsEp) {
-    let prog = t/tempsEp*100;
-    let bar = document.getElementById('bar');
-    bar.value = prog;
-    bar.textContent = `${prog}%`;
-}

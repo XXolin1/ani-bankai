@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="global">
+    <div class="global" id="base">
         <select id="combox-back" class="combox-back">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -115,6 +115,27 @@
             </div>
 
         </div>
+    </div>
+    <div class="videoMode" id="VidMod"style="display: none;">
+        <div id="Vid-content-list" class="content-list">
+            <div class="Vid-top-bar">
+                <h1>Haikyuu!!</h1>
+                <button class="Vid-notif" id="notif"></button>
+            </div>
+            
+            <div class="Vid-info">
+                <div>
+                    <h3>Ep: 2 - Le retour du roi</h3>
+                </div>
+                <div class="Vid-load">
+                    <button class="Vid-goto-btn"></button>
+                    <progress value="75" max="100" id="bar">75 %</progress>
+                    <p id="timecode">17:15</p>
+                </div>
+            </div>
+            
+        </div>
+
     </div>
 </body>
 
