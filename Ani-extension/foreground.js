@@ -8,7 +8,7 @@
 //console.log(location.href);
 
 // The ID of the extension we want to talk to.
-var editorExtensionId = "kfehckjhfdgkapccpglbdfjgbhlfnflk";
+let editorExtensionId = "olggkeglcmmolkpmnpffffcpcpdlonpk";
 
 class anime {
   constructor() {
@@ -40,7 +40,7 @@ switch (location.hostname) {
   case 'www.crunchyroll.com':
   case 'static.crunchyroll.com':
     crunchyroll(anime, location.hostname, () => {
-      // callback funct to save data
+      console.log("Anime : ", animeCarac);
     });
 
     break;

@@ -41,9 +41,7 @@ body {
     
     border-radius: 5px;
 }
-.notif{
 
-}
 .load{
     display: flex;
     align-items: center;
@@ -88,25 +86,11 @@ button:hover {
 
 .top-bar{
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
 }
 
-.top-bar .notif{
-    height: 20px;
-    background-image: url('/images-extension/bouton-notifications.png');
-    background-color:transparent;
-    background-size: cover;
-    width: 20px;
-    margin-top: 8px;
-    margin-right: 18px;
-    border: none;
-}
-.top-bar .notif:hover{
-    background-color: #b0a8a0;
-    border-radius: 5px;
-}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -241,7 +225,7 @@ button:hover {
 
 .content-list:hover h1{
     transform: translateX(-320px);
-    transition: 8s;
+    transition: 6s;
 }
 .content-list:hover h1{
     overflow: visible;
@@ -316,3 +300,69 @@ button:hover {
     flex-direction: column;
     justify-content: center;
 }
+
+.top-bar .notif {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 50px;
+}
+/*------ Settings ------*/
+.container {
+    --color: #a5a5b0;
+    --size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: var(--size);
+    user-select: none;
+    fill: var(--color);
+  }
+  
+  .container .bell-regular {
+    animation: keyframes-fill .5s;
+  }
+  
+  .container .bell-solid {
+    display: none;
+    animation: keyframes-fill .5s;
+  }
+  
+  /* ------ On check event ------ */
+  .container input:checked ~ .bell-regular {
+    display: none;
+  }
+  
+  .container input:checked ~ .bell-solid {
+    display: block;
+  }
+  
+  /* ------ Hide the default checkbox ------ */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* ------ Animation ------ */
+  @keyframes keyframes-fill {
+    0% {
+      opacity: 0;
+    }
+  
+    25% {
+      transform: rotate(25deg);
+    }
+  
+    50% {
+      transform: rotate(-20deg) scale(1.2);
+    }
+  
+    75% {
+      transform: rotate(15deg);
+    }
+  }
