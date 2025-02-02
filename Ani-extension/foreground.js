@@ -4,11 +4,12 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-//console.log('Foreground script running');
-//console.log(location.href);
-
 // The ID of the extension we want to talk to.
+
+
 let editorExtensionId = "olggkeglcmmolkpmnpffffcpcpdlonpk";
+
+
 
 class anime {
   constructor() {
@@ -21,7 +22,7 @@ class anime {
 
 let animeCarac = new anime();
 
-console.log("URL : ", location.hostname, location.href);
+
 
 //var views = chrome.extension.getViews({ type: "popup" }); juste comme ca
 
@@ -39,8 +40,8 @@ switch (location.hostname) {
 
   case 'www.crunchyroll.com':
   case 'static.crunchyroll.com':
-    crunchyroll(anime, location.hostname, () => {
-      console.log("Anime : ", animeCarac);
+    crunchyroll(animeCarac, location, () => {
+      chrome.runtime.sendMessage({ action: "newAnime", data: animeCarac });
     });
 
     break;
@@ -57,24 +58,26 @@ function getAnimeCarac() {
 }
 
 
-
-function crunchyroll(animeClass, host, callback) {
-  // Find the title of the anime
-  if (host == 'www.crunchyroll.com') {
-    // Trouver le conteneur à observer
+function crunchyroll(animeClass, location, callback) {
+  if (location.hostname === 'www.crunchyroll.com') {
     let targetNode = document.getElementById('content');
-    // Configuration de l'observateur
     let config = { childList: true, subtree: true };
 
-    // Callback pour gérer les mutations
     let observerCallback = function (mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type === 'childList') {
           let titleNode = document.querySelector('h1');
+          let animenode = document.querySelector('a.show-title-link');
           if (titleNode) {
             const h1 = titleNode.textContent.split(' - ');
             animeClass.episode = h1[0].substring(1);
             animeClass.title = h1[1];
+            animeClass.link = location.href;
+          }
+          if (animenode) {
+            animeClass.name = animenode.querySelector("h4").textContent;
+          }
+          if (titleNode && animenode) {
             callback();
             observer.disconnect();
             break;
@@ -83,21 +86,21 @@ function crunchyroll(animeClass, host, callback) {
       }
     };
 
-    // Création de l'observateur
     let observer = new MutationObserver(observerCallback);
     observer.observe(targetNode, config);
   }
-  else if (host == 'static.crunchyroll.com') {
+  else if (location.hostname == 'static.crunchyroll.com') {
     let video = document.querySelector('video');
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));
-    });
+    }); 
+    video.duration;
   }
   else {
     console.log('Host not supported');
   }
-
 }
+
 
 
 
@@ -117,54 +120,4 @@ function voiranime(animeClass) {
     console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
   }
 
-
-
-  let video = document.querySelector('video');
-  console.log("Video : ", video)
-  video = document.querySelector('video');
-  console.log("URL case iframe : ", location.hostname, location.href);
-
-  console.log("ca skip ici c chiants");
-
-  if (video != null) {
-    console.log("Video : ", video);
-    video.addEventListener('play', () => {
-
-    });
-
-    chrome.runtime.sendMessage(editorExtensionId, { type: "video", data:""}, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-      } else {
-        console.log("[Foreground] Réponse reçue du service worker :", response);
-      }
-    });
-    // video.duration;
-    // video.currentTime;
-
-    video.addEventListener('timeupdate', () => {
-      console.log(Math.floor(video.currentTime));
-
-      chrome.runtime.sendMessage(editorExtensionId, { type: "timecode", data: Math.floor(video.currentTime) }, (response) => {
-        if (chrome.runtime.lastError) {
-          console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-        } else {
-          console.log("[Foreground] Réponse reçue du service worker :", response);
-        }
-      });
-    });
-  }
-
-
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if(animeCarac.title == "") return;
-    console.log("Message reçu :", message);
-    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: animeCarac.title }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
-      } else {
-        console.log("[Foreground] Réponse reçue du service worker :", response);
-      }
-    });
-  })
 }
