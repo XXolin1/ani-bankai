@@ -1,66 +1,45 @@
+let linkanime;
+document.addEventListener("DOMContentLoaded", () => {
+    chrome.storage.local.get("popupData", (result) => {
+        if (result.popupData) {
+            document.getElementById("anime-title").innerText = result.popupData.name;
+            document.getElementById("anime-episode").innerText = result.popupData.title;
+            linkanime = result.popupData.link;
+        }
+    });
+    document.getElementById("goto-btn").addEventListener("click", function () {
+        if (linkanime) {
+            chrome.tabs.create({ url: linkanime });
+        }
+    });
+});
 
 let title = document.getElementById('title');
 let time = document.getElementById('time');
 
+// second to m:s
+function secondsToms(d) {
+    d = Number(d);
+    let m = Math.floor(d % 3600 / 60);
+    let s = Math.floor(d % 3600 % 60);
+    return m +":"+s;
+}
 
-console.log("Popup.js");
+// update time
+function updateTime(t,tempsEp) {
+    let prog = t/tempsEp*100;
+    let bar = document.getElementById('bar');
+    bar.value = prog;
+    bar.textContent = `${prog}%`;
+}
 
-/*
-chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse) {
-        console.log("Popup.js : Message reçu : ", request);
-        let test = getElementById('output');
-        test.textContent = request;
-    });
-*/
-
-    
-// -----------------------------------------------------------
-
-// 1. Établir une connexion avec le service worker
-const port = chrome.runtime.connect({ name: "popup" });
-console.log("[Popup] Connexion au service worker établie sur le port :", port);
-
-// -----------------------------------------------------------
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.visibilityState === "visible") {
-        // Envoyer un message au service worker pour indiquer que la popup est prête
-        port.postMessage({ action: "popupReady" });
-        console.log("[Popup] Message envoyé au service worker");
-    }
-});
-
-
-
-
-// -----------------------------------------------------------
-
-// 2. Écouter les messages du service worker
-port.onMessage.addListener((message) => {
-    //alert("test");
-    console.log("Message reçu depuis le service worker :", message);
-
-    // Vérifier le type d'action et mettre à jour l'affichage si nécessaire
-    if (message.action === "update") {
-        // Exemple : mise à jour d'un élément HTML dans la popup
-        const title = document.getElementById("anime-title")
-
-        if (title) {
-            title.textContent = message.data;
-        }
-    }
-    
-    if (message.action === "timecode") {
-        const timecode = document.getElementById("timecode")
-
-        if (timecode) {   
-            timecode.textContent = message.data;
-            //alert("j suis la !!!")
-        }
-    }
-});
+function VideoMode(){
+    // display none everything
+    let base = document.getElementById('base');
+    base.style.display = "none";
+    let vidmod = document.getElementById('VidMod');
+    vidmod.style.display = "block";
+}
 
 
 // -----------------------------------------------------------
@@ -85,10 +64,8 @@ notifications.forEach(notification => {
 
 // theme
 let theme = document.getElementById('combox-back');
-console.log(theme);
 
 theme.addEventListener("change", () =>{
-    console.log(theme.value);
     switch (theme.value) {
         
         case "1":
@@ -115,18 +92,3 @@ theme.addEventListener("change", () =>{
 
 
 
-// second to m:s
-function secondsToms(d) {
-    d = Number(d);
-    let m = Math.floor(d % 3600 / 60);
-    let s = Math.floor(d % 3600 % 60);
-    return m +":"+s;
-}
-
-// update time
-function updateTime(t,tempsEp) {
-    let prog = t/tempsEp*100;
-    let bar = document.getElementById('bar');
-    bar.value = prog;
-    bar.textContent = `${prog}%`;
-}

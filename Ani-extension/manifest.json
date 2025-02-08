@@ -15,7 +15,9 @@
     },
     "permissions": [
     "tabs",
-    "activeTab"
+    "activeTab",
+    "scripting",
+    "storage"
 ],
     "host_permissions": [
         "*://*/*"
@@ -26,7 +28,16 @@
     "content_scripts": [{
         "run_at": "document_idle",
         "js": ["foreground.js"],
-        "matches": ["https://v5.voiranime.com/*", "https://*.crunchyroll.com/*", "https://vidmoly.to/*", "*://*.6v254h9v.xyz/*", "*://*.voe.sx/", "https://streamtape.com/*", "https://sandratableother.com/*", "https://my.mail.ru/video/embed/*"],
+        "matches": [
+  "https://v5.voiranime.com/*",
+  "https://*.crunchyroll.com/*",
+  "https://vidmoly.to/*",
+  "*://*.6v254h9v.xyz/*",
+  "*://*.voe.sx/*",
+  "https://sandratableother.com/*",
+  "https://my.mail.ru/*",
+  "https://streamtape.com/*"
+],
         "type": "module",
         "all_frames": true
     }],
