@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.get("popupData", (result) => {
         if (result.popupData) {
             document.getElementById("anime-title").innerText = result.popupData.name;
-            document.getElementById("anime-episode").innerText = result.popupData.title;
+            document.getElementById("anime-episode").innerText =  " Ep " + result.popupData.episode + " - " + result.popupData.title;
             linkanime = result.popupData.link;
+            updateTime(result.popupData.currentTime, result.popupData.duration);
         }
     });
     document.getElementById("goto-btn").addEventListener("click", function () {
@@ -27,10 +28,14 @@ function secondsToms(d) {
 
 // update time
 function updateTime(t,tempsEp) {
+    if (!isFinite(t) || !isFinite(tempsEp) || tempsEp <= 0) {
+        return;
+    }
     let prog = t/tempsEp*100;
     let bar = document.getElementById('bar');
     bar.value = prog;
     bar.textContent = `${prog}%`;
+    document.getElementById('timecode').textContent = secondsToms(t);
 }
 
 function VideoMode(){

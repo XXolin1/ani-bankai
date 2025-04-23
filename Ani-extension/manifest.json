@@ -29,7 +29,7 @@
         "run_at": "document_idle",
         "js": ["foreground.js"],
         "matches": [
-  "https://v5.voiranime.com/*",
+  "https://v6.voiranime.com/*",
   "https://*.crunchyroll.com/*",
   "https://vidmoly.to/*",
   "*://*.6v254h9v.xyz/*",
