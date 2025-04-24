@@ -8,6 +8,7 @@ class anime {
     this.link = "";
     this.duration = 0;
     this.currentTime = 0;
+    this.notif = false;
   }
 }
 
@@ -27,7 +28,7 @@ switch (location.hostname) {
   case "www.crunchyroll.com":
   case "static.crunchyroll.com":
     crunchyroll(animeCarac, location, () => {
-      chrome.runtime.sendMessage({ action: "newAnime", data: animeCarac });
+      chrome.runtime.sendMessage({ type: "animeData", data: animeCarac });
     });
 
     break;
@@ -43,15 +44,18 @@ function getAnimeCarac() {
 }
 
 function crunchyroll(animeClass, location, callback) {
-  window.addEventListener("message", function (event) {
-    if (event.data && event.data.type === "Duration") {
-      animeCarac.duration = event.data.data;
+  window.addEventListener("message", (event) => {
+    if (!event.data) return;
 
+    if (event.data.type === "Duration") {
+      animeCarac.duration = event.data.data;
     }
-  });
-  window.addEventListener("message", function (event) {
-    if (event.data && event.data.type === "Time") {
+
+    if (event.data.type === "Time") {
       animeCarac.currentTime = event.data.data;
+    }
+
+    if (animeCarac.title) {
       callback();
     }
   });

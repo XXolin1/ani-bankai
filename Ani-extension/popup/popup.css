@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
     background: linear-gradient(to bottom right, #FFED68 0%, #38D4F8 100%);
     display: flex;
@@ -10,7 +12,6 @@ body {
 .profile-picture {
     position: relative;
     margin-top: 25px;
-    margin-left: 25px;
     scale: 1.6; 
     width: 40px;
     height: 40px;
@@ -20,12 +21,11 @@ body {
 .calendrier {
     background-image: url('/images-extension/calendrier.png');
     background-size: cover;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border: none;
     padding: 5px;
 }
-
 
 .goto-btn{
     background-image: url('/images-extension/envoyer.png');
@@ -74,9 +74,12 @@ progress::-webkit-progress-value {
 
 button{
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     background-color: transparent;
 }
 
@@ -117,6 +120,7 @@ button:hover {
     flex-shrink: 0;
     width: 344px;
     margin-right: 15px;
+    margin-left: 10px;
     margin-bottom: 10px;
 }
 .content-list h1 {
@@ -148,10 +152,10 @@ button:hover {
 .combo-box-select {
     border: none;
     background-color: transparent;
-    font-family: Arial, Helvetica, sans-serif; 
+    font-family: "Inter", sans-serif;
     font-size: 14px; 
     font-weight: 700; 
-    margin-left: 55px;
+    margin-left: 10px;
     margin-right: 90px;
     scrollbar-color: #D9D9D9 #FFF8EA;
     
@@ -181,7 +185,7 @@ button:hover {
 .button-part{
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     height: 453px;
     width: 100%;
 }
@@ -223,13 +227,6 @@ button:hover {
     background-color: #8f8075;
 }
 
-.content-list:hover h1{
-    transform: translateX(-320px);
-    transition: 6s;
-}
-.content-list:hover h1{
-    overflow: visible;
-}
 
 
 
