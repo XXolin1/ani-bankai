@@ -17,6 +17,7 @@ class anime {
     this.title = "";
     this.episode = "";
     this.link = "";
+    this.traduction = "";
   }
 }
 
@@ -28,14 +29,16 @@ let animeCarac = new anime();
 
 switch (location.hostname) {
 
-  case 'v5.voiranime.com':
+  case 'v6.voiranime.com':
   case 'vidmoly.to':
   case '6v254h9v.xyz':
   case 'voe.sx':
   case 'sandratableother.com':
   case 'my.mail.ru':
     console.log("URL case iframe : ", location.hostname, location.href);
-    voiranime(animeCarac);
+    voiranime(animeCarac, () => {
+      chrome.runtime.sendMessage({ action: "newAnime", data: animeCarac });
+    });
     break;
 
   case 'www.crunchyroll.com':
@@ -93,7 +96,7 @@ function crunchyroll(animeClass, location, callback) {
     let video = document.querySelector('video');
     video.addEventListener('timeupdate', () => {
       console.log(Math.floor(video.currentTime));
-    }); 
+    });
     video.duration;
   }
   else {
@@ -102,22 +105,78 @@ function crunchyroll(animeClass, location, callback) {
 }
 
 
+function voiranime(animeClass, callback) {
 
-
-
-function voiranime(animeClass) {
-
-  if (location.hostname == 'v5.voiranime.com') {
+  if (location.hostname == 'v6.voiranime.com') {
 
     let link = location.href;
-    let title = link.split("/")[4].split("-").join(" ");
+    let name = link.split("/")[4].split("-").join(" ");
     let episodeLink = link.split("/")[5];
-    let episode = episodeLink.split("-")[4];
-    let traduction = episodeLink.split("-")[5];
+    let episode = episodeLink.split("-").slice(-2, -1)[0];
+    let traduction = episodeLink.split("-").pop();
 
-    animeCarac.title = title;
+    animeClass.name = name;
+    animeClass.episode = episode;
+    animeClass.link = link;
+    animeClass.traduction = traduction;
+    animeClass.title = name + " " + episode + " " + traduction;
 
-    console.log("Traduction : ", traduction, "Episode split : ", episodeLink.split("-"), "Title : ", title, "Link split : ", link.split("/"), "Link : ", link, "URL : ", location.hostname, location.href);
+    //callback();
+    /*
+        let iframe = document.querySelector('iframe');
+        console.log("iframe : " + iframe);
+    
+    
+        let video = iframe.contentDocument.querySelector('video');
+        console.log("Vidéo trouvée :", video);
+        console.log("Source de la vidéo :", video ? video.src : "Pas de vidéo trouvée");
+    */
+
+    let iframe = document.querySelector('iframe');
+
+    if (iframe) {
+      // Envoyer une requête à l'iframe pour demander le temps de la vidéo
+      setInterval(() => {
+        iframe.contentWindow.postMessage({ action: "getTime" }, "*");
+      }, 1000);
+
+      // Écouter les réponses de l'iframe
+      window.addEventListener("message", (event) => {
+        if (event.data.action === "videoTime") {
+          console.log("⏳ Temps actuel de la vidéo :", event.data.time, "secondes");
+        }
+      });
+    } else {
+      console.log("❌ Aucune iframe détectée.");
+    }
+
+
+    window.addEventListener("message", (event) => {
+      if (event.data.action === "getTime") {
+        let video = document.querySelector("video");
+        if (video) {
+          event.source.postMessage({ action: "videoTime", time: Math.floor(video.currentTime) }, "*");
+        }
+      }
+    });
+
   }
-
 }
+
+
+/////////////////////////////////
+
+
+/*
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if(animeCarac.title == "") return;
+    console.log("Message reçu :", message);
+    chrome.runtime.sendMessage(editorExtensionId, { type: "update", data: animeCarac.title }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Erreur lors de l'envoi du message :", chrome.runtime.lastError);
+      } else {
+        console.log("[Foreground] Réponse reçue du service worker :", response);
+      }
+    });
+  })
+*/

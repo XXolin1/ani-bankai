@@ -1,9 +1,11 @@
+// data management
 let linkanime;
 document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.get("popupData", (result) => {
         if (result.popupData) {
-            document.getElementById("anime-title").innerText = result.popupData.name;
-            document.getElementById("anime-episode").innerText = result.popupData.title;
+            document.getElementById("anime-name").innerText = result.popupData.name;
+            document.getElementById("episode-title").innerText = result.popupData.title;
+            document.getElementById("anime-episode").innerText = "Ep: " + result.popupData.episode + " - ";
             linkanime = result.popupData.link;
         }
     });

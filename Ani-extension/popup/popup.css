@@ -72,6 +72,10 @@ progress::-webkit-progress-value {
     justify-content: center;
 }
 
+.info-episode {
+    display: flex;
+}
+
 button{
     border: none;
     border-radius: 10px;
@@ -136,6 +140,10 @@ button:hover {
     margin-bottom: -8px;
     color: #ffffff;
     font-size: 12px;
+}
+
+#episode-title {
+    margin-left: 5px;
 }
 
 .combo{
